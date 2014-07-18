@@ -1,0 +1,182 @@
+<!doctype html>
+<html><!--  根元素，必须包含head和body -->
+<!-- head: 文档元数据集合，包括脚本和样式等 -->
+<head>
+    <!-- meta, title, style, script, base, link -->
+
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- base：文档相对链接的base url -->
+    <!-- <base href=""> -->
+
+    <!-- link：Defines a link to an external resource，href指定链接，type指定mimetype,rel指定link元素和当前页面的关系 -->
+    <!-- <link rel="shortcut icon" href="" />
+
+    <link rel="stylesheet" href=""> -->
+
+    <style>
+    .col1 {
+        background: #900;
+    }
+
+    pre {
+        color: #900;
+    }
+    </style>
+</head>
+<body>
+<!-- HTML Comment -->
+<div id="page">
+    <!-- div, span无语义，只是被用来进行分组以便使用css -->
+
+    <!-- 缩写形式 -->
+    <abbr title="HyperText Markup Language">HTML abbr</abbr>
+
+    <!-- HTML5已废弃 -->
+    <acronym title="Cascading Style Sheets">CSS acronym</acronym>
+
+    <!-- strong语气更重 -->
+    <!-- 一般强调使用em即可， 特殊强调使用strong -->
+    <strong>strong的强调性更强</strong>
+    <em>em</em>
+
+    <a href="mailto:someone@microsoft.com">发送邮件</a>
+
+    <!-- block，地址和联系信息 -->
+    <address>77 HTML Dog Road, Ealing, London</address>
+
+    <!-- cite指定从哪引用 -->
+    <!-- The content of a blockquote element must include block-level elements such as headings, lists, paragraphs or div's. -->
+    <blockquote cite="http://developer.mozilla.org">
+        This is blockquote
+    </blockquote>
+
+    <!-- blockquote的行内版 -->
+    <q cite=""></q>
+
+    <!-- 术语定义 -->
+    <p><dfn title="Microsoft web browser">Internet Explorer</dfn> is the most popular browser used underwater.</p>
+
+    <!-- 该标签对参考文献的引用进行定义，比如书籍或杂志的标题。 -->
+    <!-- Defines an in-line citation or reference to another source. -->
+    <p><cite>[ISO-0000]</cite></p>
+
+    <kbd>ctrl + E</kbd>
+
+    <hr />
+
+    <!-- pre 元素可定义预格式化的文本。被包围在 pre 元素中的文本通常会保留空格和换行符。而文本也会呈现为等宽字体。 -->
+    <pre><code>
+        alert("");
+    </code></pre>
+    <pre>
+    body {
+      color:red;
+    }
+    </pre>
+
+    <ol>
+        <li>1</li>
+    </ol>
+
+    <dl>
+        <dt>dt</dt>
+        <dd>dd</dd>
+    </dl>
+
+    <!-- <small> 标签将旁注 (side comments) 呈现为小型文本。 -->
+    <small>small</small>
+
+    <table>
+        <caption>table caption</caption>
+        <!-- <colgroup> 标签用于对表格中的列进行组合，以便对其进行格式化。 -->
+        <!-- col必须要在colgroup内 -->
+        <colgroup>
+            <col class="col1" />
+            <col class="col2" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>th1</th>
+                <th>th2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>td1</td>
+                <td>td2</td>
+            </tr>
+            <tr>
+                <td class="" colspan="2">td3</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <form action="">
+        <fieldset>
+            <legend>legend</legend>
+        </fieldset>
+
+        <input type="email">
+        <input type="number" name="" id="">
+        <input type="range" name="" id="">
+        <input type="search" name="" id="">
+        <input type="tel">
+        <input type="url">
+
+        <input type="submit" value="submit">
+    </form>
+
+    <!-- html5 -->
+    <header></header>
+    <footer></footer>
+
+    <!--
+    section元素表示文档或应用的一个部分。所谓“部分”，这里是指按照主题分组的内容区域，通常会带有标题。
+
+    section不是通用容器元素。如果仅仅是用于设置样式或脚本处理，应用div元素。一条简单的准则是，只有元素内容会被列在文档大纲中时，才适合用section元素。
+
+    div section article ，语义是从无到有，逐渐增强的。div 无任何语义，仅仅用作样式化或者脚本化的钩子(hook)，对于一段主题性的内容，则就适用 section，而假如这段内容可以脱离上下文，作为完整的独立存在的一段内容，则就适用 article。原则上来说，能使用 article 的时候，也是可以使用 section 的，但是实际上，假如使用 article 更合适，那么就不要使用 section 。nav 和 aside 的使用也是如此，这两个标签也是特殊的 section，在使用 nav 和 aside 更合适的情况下，也不要使用 section 了。 -->
+
+    <!-- 定义一个区域 -->
+    <section>
+        <h1>h1</h1>
+        <p>description</p>
+    </section>
+
+    <!-- 导航链接 -->
+    <nav>
+        <a href="index.asp">Home</a>
+        <a href="html5_meter.asp">Previous</a>
+        <a href="html5_noscript.asp">Next</a>
+    </nav>
+
+    <!-- 定义独立的, 完整的相关内容 -->
+    <!-- article代表的内容可以被外部引用。例如：博客中的一篇文章，论坛中的一个帖子或者一段浏览者的评论等。否则请使用section -->
+    <article></article>
+
+    <!-- 其余页面内容，移除了之后余下内容仍然是有意义的 -->
+    <!-- aside 的内容应该与附近的内容相关。 -->
+    <aside></aside>
+
+    <!-- 标题的集合 -->
+    <hgroup>
+
+    </hgroup>
+
+    <!-- 表格 -->
+    <figure>
+        <img src="obelisk.jpg">
+        <figcaption>Tixall Obelisk</figcaption>
+    </figure>
+
+    <time datetime="2052-11-21"></time>
+</div>
+
+
+<script>
+
+</script>
+</body>
+</html>
