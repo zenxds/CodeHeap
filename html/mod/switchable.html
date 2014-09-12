@@ -7,20 +7,20 @@
 <body>
 
 <div class="switchable">
-    <ul class="switchable-content">
-        <li class="switchable-panel">
+    <ul data-switchable-role="content">
+        <li data-switchable-role="panel">
             <a href=""><img src="http://gtms02.alicdn.com/tps/i2/TB14j8SFVXXXXcKXXXXQAsJYXXX-180-180.jpg" alt=""></a>
         </li>
-        <li class="switchable-panel">
+        <li data-switchable-role="panel" class="hidden">
             <a href=""><img src="http://gtms02.alicdn.com/tps/i2/TB14j8SFVXXXXcKXXXXQAsJYXXX-180-180.jpg" alt=""></a>
         </li>
     </ul>
-    <ul class="switchable-nav">
-        <li class="switchable-trigger switchable-active">•</li>
-        <li class="switchable-trigger">•</li>
+    <ul class="switchable-nav" data-switchable-role="nav">
+        <li class="switchable-active" data-switchable-role="trigger">•</li>
+        <li data-switchable-role="trigger">•</li>
     </ul>
-    <a class="prev-btn" href="javascript:void(0);" data-switchable-role="prev"></a>
-    <a class="next-btn" href="javascript:void(0);" data-switchable-role="next"></a>
+    <a class="prev-btn" href="javascript:void(0);" data-role="prev"></a>
+    <a class="next-btn" href="javascript:void(0);" data-role="next"></a>
 </div>
 
 </body>

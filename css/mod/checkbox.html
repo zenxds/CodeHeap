@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>checkbox</title>
+    <link rel="stylesheet" href="http://static.tianxia.taobao.com/tbtx/base/2.0/css/reset.css">
+    <style>
+    .checkbox {
+        display: none;
+    }
+
+    .label:before {
+        content: "";
+        margin: 0 .5em 0 0;
+        float: left;
+        width: 1em;
+        height: 1em;
+        background: #fff;
+        border: 1px solid #222;
+        border-radius: 3px;
+    }
+    .checkbox:checked + .label:before {
+        content: "✓";
+    }
+    </style>
+</head>
+<body>
+    <input id="sample-checkbox" class="checkbox" type="checkbox">
+    <label class="label" for="sample-checkbox">Click me</label>
+</body>
+</html>

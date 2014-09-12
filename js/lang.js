@@ -6,6 +6,18 @@ function isType(type) {
     };
 }
 
+if (!Object.create) {
+    var Ctor = function() {};
+    // See: http://jsperf.com/object-create-vs-new-ctor
+    Object.create = Object.__proto__ ? function(proto) {
+        return {
+            __proto__: proto
+        };
+    } : function(proto) {
+        Ctor.prototype = proto;
+        return new Ctor();
+    };
+}
 
 // 生成cid
 var generateCid = function(prefix) {
@@ -86,4 +98,15 @@ var shuffle = function(array) {
         // array[i] = [array[j], array[j] = array[i]][0];
     }
     return array;
+};
+
+
+// 是否是闰年
+var isLeapYear = function(date) {
+    return new Date(date.getFullYear(), 2, 0).getDate() == 29;
+};
+
+// 保留两位小数
+var getter = function(val) {
+    return Math.round(val * 100)/100;
 };
