@@ -20,6 +20,7 @@
         var data = {
             page: location.href,
             ua: navigator.userAgent,
+            line: line,
             time: +new Date()
         };
 
@@ -31,9 +32,6 @@
 
         if (url) {
             data.url = url;
-        }
-        if (line) {
-            data.line = line;
         }
 
         // 有堆栈信息使用堆栈信息
@@ -50,7 +48,7 @@
         }
         s = s.join("&");
 
-        console.log(data);
+        // console.log(data);
         // console.log(s);
     };
 })(window);
