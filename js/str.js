@@ -21,7 +21,7 @@ var truncate = function(str, length, truncation) {
 // - _
 // 转为驼峰风格
 var camelize = function(str){
-    if (str.indexOf("-") < 0 || str.indexOf("_") < 0) {
+    if (str.indexOf("-") < 0 && str.indexOf("_") < 0) {
         return str;
     }
     return str.replace(/[-_][^-_]/g, function(match) {
