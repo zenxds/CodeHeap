@@ -6,6 +6,8 @@
 html,
 body {
   height: 100%;
+  -webkit-user-select: none;
+  user-select: none;
 }
 html {
   font-size: 62.5%;
@@ -30,6 +32,9 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
+a, img {
+    -webkit-touch-callout: none;
+}
 h1, h2, h3 {
   font-weight: normal;
 }
@@ -51,9 +56,11 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
   display: -webkit-flex;
   display: flex;
 }
-/**
- * .flex-item {-webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
- */
+.flex-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
 
 .flex-center {
   -webkit-box-pack: center;
