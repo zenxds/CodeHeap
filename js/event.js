@@ -20,3 +20,8 @@ $window.on("resize", S.debounce(function() {
 
     scrollTop = scrollNewTop;
 }, 80));
+
+
+$input.on("input change paste keyup propertychange", function() {
+
+});
