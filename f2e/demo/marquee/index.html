@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .marquee {
+        width: 300px;
+        height: 30px;
+        line-height: 30px;
+        overflow: hidden;
+    }
+    .marquee-inner {
+        width: 2200px;
+        overflow: hidden;
+    }
+    .marquee p {
+        float: left;
+        font-size: 12px;
+        width: 1100px;
+    }
+    </style>
+    <script src="http://static.tianxia.taobao.com/tbtx/base/2.5/js/??tbtx.js,combo.js"></script>
+</head>
+<body>
+
+
+    <div class="marquee">
+        <div class="marquee-inner">
+            <p>因春节临近，2015年2月6日-2015年2月26日期间，蜜糖俱乐部将暂停更新/发货。但您仍可以正常参与蜜糖相关活动，所得奖品将会在2月26日后陆续发出，感谢亲的理解与支持，提前祝大家新年快乐！</p>
+            <p>因春节临近，2015年2月6日-2015年2月26日期间，蜜糖俱乐部将暂停更新/发货。但您仍可以正常参与蜜糖相关活动，所得奖品将会在2月26日后陆续发出，感谢亲的理解与支持，提前祝大家新年快乐！</p>
+            </div>
+    </div>
+
+    <script>
+    require("jquery", function() {
+        // 复制一份，无限滚动
+
+        var $marquee = $(".marquee"),
+            marquee = $marquee.get(0),
+            textWidth = $("p:first").width();
+
+        marquee.scrollLeft = 0;
+
+        var scroll = function() {
+            var left = marquee.scrollLeft;
+
+            if (left >= textWidth) {
+                marquee.scrollLeft = 0;
+            } else {
+                marquee.scrollLeft += 2;
+            }
+        };
+
+        var timer;
+        var start = function() {
+            timer = setInterval(scroll, 50);
+        };
+        var stop  = function() {
+            clearInterval(timer);
+        };
+
+        setTimeout(start, 200);
+
+        $marquee.on("mouseenter", stop).on("mouseleave", start);
+    });
+    </script>
+</body>
+</html>
