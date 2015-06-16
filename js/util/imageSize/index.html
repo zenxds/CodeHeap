@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script src="http://static.tianxia.taobao.com/tbtx/base/gallery/jquery/1.11.1/jquery.js"></script>
+    <script>
+        $("<img />").attr("src", "http://gtms04.alicdn.com/tps/i4/TB1zK7HHXXXXXcXXFXXIC1MYFXX-392-512.jpg").load(function() {
+
+            // Note: $(this).width() will not work for in memory images.
+            alert(this.width);
+            alert(this.height);
+            alert($(this).width());
+        });
+    </script>
+</body>
+</html>

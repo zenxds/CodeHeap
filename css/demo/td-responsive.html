@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格列宽自适用</title>
+    <link rel="stylesheet" href="http://static.tianxia.taobao.com/tbtx/base/2.0/css/reset.css">
+    <style>
+    body{
+        font: 14px sans-serif;
+    }
+    table{
+        width:300px;
+        font: 16px sans-serif;
+    }
+    td{
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+    }
+    table.autowidth td{
+        white-space:nowrap;
+    }
+    </style>
+</head>
+<body>
+    <h2>Non Autowidth Table</h2>
+
+    <table>
+        <tr>
+            <td>1</td>
+            <td width="100%">Mr. John Doe </td>
+            <td>United States of America</td>
+            <td>2014</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td width="100%">Mr. Paul Jones</td>
+            <td>New Zealand</td>
+            <td>2013</td>
+        </tr>
+    </table>
+
+    <h2>Autowidth Table</h2>
+
+    <table class="autowidth">
+        <tr>
+            <td>1</td>
+            <td width="100%">Mr. John Doe </td>
+            <td>United States of America</td>
+            <td>2014</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td width="100%">Mr. Paul Jones</td>
+            <td>New Zealand</td>
+            <td>2013</td>
+        </tr>
+    </table>
+</body>
