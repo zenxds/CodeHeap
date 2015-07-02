@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>两列布局demo</title>
+    <link rel="stylesheet" href="http://static.tianxia.taobao.com/tbtx/base/2.0/css/base.css">
+    <style>
+    html {
+        height: 100%;
+    }
+    body {
+        min-height: 100%;
+        padding: 10px 0;
+    }
+
+    body {
+        background: #eee;
+    }
+    .box {
+        width: 800px;
+        margin: 10px auto;
+        background: #fff;
+    }
+    .left {
+        background: #900;
+        color: #fff;
+        min-height: 300px;
+    }
+    .right {
+        background: #090;
+        color: #fff;
+        min-height: 300px;
+    }
+
+    /**
+     * 左右均浮动
+     */
+    .box-1 .left {
+        float: left;
+        width: 380px;
+        margin-right: 20px;
+    }
+    .box-1 .right {
+        float: right;
+        width: 400px;
+    }
+
+    /**
+     * 左浮动，右bfc
+     */
+    .box-2 .left {
+        float: left;
+        width: 380px;
+        margin-right: 20px;
+    }
+    .box-2 .right {
+        overflow: hidden;
+    }
+
+    /**
+     * 左浮动
+     * 右margin拉开
+     */
+    .box-3 .left {
+        float: left;
+        width: 380px;
+    }
+    .box-3 .right {
+        margin-left: 400px;
+    }
+
+    /**
+     * 左绝对定位
+     * 右margin拉开/或者父元素padding-left
+     */
+    .box-4 {
+        position: relative;
+    }
+    .box-4 .left {
+        position: absolute;
+        width: 380px;
+    }
+    .box-4 .right {
+        margin-left: 400px;
+    }
+
+    .box-5 .left {
+        float: left;
+        width: 380px;
+        margin-left: -100%;
+    }
+    .box-5 .right {
+        float: left;
+        width: 100%;
+        background: none;
+    }
+    .box-5 .inner {
+        margin-left: 400px;
+        background: #090;
+        height: 300px;
+    }
+    </style>
+</head>
+<body>
+    <div class="box box-1 clearfix">
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+
+    <div class="box box-2 clearfix">
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+
+    <div class="box box-3 clearfix">
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+
+    <div class="box box-4 clearfix">
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+
+    <div class="box box-5 clearfix">
+        <div class="right">
+            <div class="inner">
+                right
+            </div>
+        </div>
+        <div class="left">left</div>
+    </div>
+</body>
+</html>
