@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" id="demo">
+    <script src="http://static.tianxia.taobao.com/tbtx/base/gallery/jquery/1.11.1/jquery.js"></script>
+    <script>
+        var handler = function() {
+            console.log(element.value);
+        };
+
+        var element = document.getElementById('demo');
+
+        if (window.addEventListener) {
+            element.addEventListener('input', handler);
+        } else {
+            element.attachEvent('onpropertychange', function(e) {
+                if (e.propertyName === 'value') {
+                    handler();
+                }
+            });
+        }
+
+        if (document.documentMode === 9) {
+            var selectionchange = function(e) {
+                if (e.type === 'focus') {
+                    document.addEventListener('selectionchange', handler);
+                } else {
+                    document.removeEventListener('selectionchange', handler);
+                }
+            };
+
+            element.addEventListener('focus', selectionchange);
+            element.addEventListener('blur', selectionchange);
+        }
+    </script>
+</body>
+</html>
