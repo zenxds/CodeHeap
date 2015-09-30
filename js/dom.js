@@ -7,3 +7,12 @@
 // createElement
 // appendChild
 // removeChild
+
+var doc = document;
+var de = doc.documentElement;
+
+var pageHeight = doc.body.scrollHeight;
+
+var scrollX = window.pageXOffset || (de && de.scrollLeft) || doc.body.scrollLeft;
+
+var viewportWidth = window.innerWidth || (de && de.clientWidth) || doc.body.clientWidth;
