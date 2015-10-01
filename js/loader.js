@@ -31,7 +31,7 @@ var ua = navigator.userAgent;
 var isOldWebKit = +ua.replace(/.*(?:AppleWebKit|AndroidWebKit)\/?(\d+).*/i, "$1") < 536;
 
 function loadCss(url, callback) {
-    var node = doc.createElement('link');
+    var node = document.createElement('link');
 
     node.charset = 'utf-8';
     node.rel = 'stylesheet';
