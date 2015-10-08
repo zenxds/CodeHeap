@@ -39,3 +39,28 @@ $window.on("resize", S.debounce(function() {
 
     scrollTop = scrollNewTop;
 }, 80));
+
+
+function hasClass(elem, className) {
+    if (elem.classList) {
+        return elem.classList.contains(className);
+    } else {
+        return (new RegExp('(\\s|^)' + className + '(\\s|$)')).test(elem.className);
+    }
+}
+
+function addClass(elem, className) {
+    if (elem.classList) {
+        elem.classList.add(className);
+    } else if (!hasClass(elem, className)){
+        elem.className += " " + className;
+    }
+}
+
+function removeClass(elem, className) {
+    if (elem.classList) {
+        elem.classList.remove(className);
+    } else if (hasClass(elem, className)) {
+        elem.className = elem.className.replace(new RegExp('(\\s|^)' + className + '(\\s|$)'), ' ');
+    }
+}
