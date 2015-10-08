@@ -6,6 +6,67 @@ function isType(type) {
     };
 }
 
+var each = function(object, fn, context) {
+    var i = 0,
+        length = object.length;
+
+    if (context) {
+        fn = fn.bind(context);
+    }
+    if (length === +length) {
+        for (; i < length; i++) {
+            if (fn(object[i], i, object) === false) {
+                break;
+            }
+        }
+    } else {
+        for (i in object) {
+            if (object.hasOwnProperty(i) && (fn(object[i], i, object) === false)) {
+                break;
+            }
+        }
+    }
+};
+
+var memoize = function(fn, hasher) {
+    var memo = {};
+
+    // 默认拿第一个传入的参数做key
+    hasher = hasher || function(val) {
+        return val;
+    };
+
+    return function() {
+        var args = arguments,
+            key = hasher.apply(this, args),
+            val = memo[key];
+
+        // 必须有返回结果才缓存
+        return memo.hasOwnProperty(key) && val != null ? memo[key] : (memo[key] = fn.apply(this, args));
+    };
+};
+
+var substitute = function(str, o) {
+    return str.replace(/\\?\{\{\s*([^{}\s]+)\s*\}\}/g, function(match, name) {
+        if (match.charAt(0) === '\\') {
+            return match.slice(1);
+        }
+        return (o[name] == null) ? '' : o[name];
+    });
+};
+
+/**
+ * 单例模式
+ * return only one instance
+ * @param  {Function} fn      the function to return the instance
+ * @return {Function}
+ */
+var singleton = function(fn) {
+    return memoize(fn, function() {
+        return 1;
+    });
+};
+
 if (!Object.create) {
     var Ctor = function() {};
     // See: http://jsperf.com/object-create-vs-new-ctor
