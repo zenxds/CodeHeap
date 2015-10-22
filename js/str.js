@@ -58,5 +58,5 @@ var stripScripts = function(str) {
 
 // 把字符串转为安全的正则源码
 var escapeRegExp = function(str) {
-    return src.replace(/([-.*+?^${}()|[\]\/\\])/g, '\\$1');
+    return str.replace(/([-.*+?^${}()|[\]\/\\])/g, '\\$1');
 };
