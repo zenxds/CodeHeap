@@ -8,6 +8,8 @@ var reg = {
 
     "整数": /^-?[1-9]\d*$/,
 
+    "16进制色值": /^#[a-fA-F0-9]{6}$/,
+
     "图片": /(.*)\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)$/,
 
     "压缩文件": /(.*)\.(rar|zip|7zip|tgz)$/,
