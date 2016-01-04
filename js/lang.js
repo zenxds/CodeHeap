@@ -6,6 +6,14 @@ function isType(type) {
     };
 }
 
+(function(global) {
+
+})(this);
+
+var global = (function() {
+    return this || (1, eval)('this');
+})();
+
 var each = function(object, fn, context) {
     var i = 0,
         length = object.length;
@@ -171,3 +179,43 @@ var isLeapYear = function(date) {
 var getter = function(val) {
     return Math.round(val * 100)/100;
 };
+
+
+var poll = function(fn, interval, timeout) {
+    timeout = timeout || 10000;
+    return new Promise(function(resolve, reject) {
+        var result = fn();
+
+        if (result) {
+            resolve(result);
+        } else {
+            var cost = 0;
+            var timer = setInterval(function() {
+                cost += interval;
+
+                result = fn();
+                if (result) {
+                    clearInterval(timer);
+                    resolve(result);
+                } else {
+                    if (cost >= timeout) {
+                        clearInterval(timer);
+                        reject();
+                    }
+                }
+            }, interval);
+        }
+    });
+};
+
+var log = function(url) {
+    var img = new Image();
+
+    var random = '_img_' + Math.random();
+    win[random] = img;
+
+    img.onload = img.onerror = function() {
+        win[random] = null;
+    };
+    img.src = url;
+}

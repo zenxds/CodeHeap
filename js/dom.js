@@ -8,38 +8,32 @@
 // appendChild
 // removeChild
 
-var doc = document;
-var de = doc.documentElement;
+// document.getElementsByTagName returns nodeList
+// in html document nodeList is htmlCollection
 
-var pageHeight = doc.body.scrollHeight;
+// document.head是html5新定义的
+var head = document.head || document.getElementsByTagName('head')[0] || document.documentElement;
+var body = document.body;
 
-var scrollX = window.pageXOffset || (de && de.scrollLeft) || doc.body.scrollLeft;
+var pageHeight = document.body.scrollHeight;
 
-var viewportWidth = window.innerWidth || (de && de.clientWidth) || doc.body.clientWidth;
+var scrollX = window.pageXOffset || (document.documentElement && document.documentElement.scrollLeft) || document.body.scrollLeft;
 
-var $window = $(window);
-var winWidth = $window.width();
-var winHeight = $window.height();
-var scrollTop = $window.scrollTop();
-$window.on("resize", S.debounce(function() {
-    var winNewWidth = $window.width();
-    var winNewHeight = $window.height();
-    // IE678 莫名其妙触发 resize
-    // http://stackoverflow.com/questions/1852751/window-resize-event-firing-in-internet-explorer
-    if (winWidth !== winNewWidth || winHeight !== winNewHeight) {
-        S.trigger("window.resize", winNewWidth, winNewHeight);
+var viewportWidth = window.innerWidth || (document.documentElement && document.documentElement.clientWidth) || document.body.clientWidth;
+
+
+// nodeList to array
+var toArray = function(nodes) {
+    var ret = [],
+        slice = [].slice;
+    try {
+        ret = slice.call(nodes, 0);
+    } catch (e) {
+        for (var i = 0; i < nodes.length; i++) {
+            ret.push(nodes[i]);
+        }
     }
-    winWidth = winNewWidth;
-    winHeight = winNewHeight;
-}, 80)).on("scroll", S.debounce(function() {
-    var scrollNewTop = $window.scrollTop();
-    if (scrollTop !== scrollNewTop) {
-        S.trigger("window.scroll", scrollNewTop, scrollTop);
-    }
-
-    scrollTop = scrollNewTop;
-}, 80));
-
+};
 
 function hasClass(elem, className) {
     if (elem.classList) {
