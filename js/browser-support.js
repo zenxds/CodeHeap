@@ -15,7 +15,7 @@ var support = {
 	"postMessage": !!window.postMessage,
 	"hashchange": "onhashchange" in window,
 	"XMLHttpRequest.prototype": !!(typeof XMLHttpRequest !== "undefined" && XMLHttpRequest.prototype && XMLHttpRequest.prototype.open),
-	"CORS": 'withCredentials' in new XMLHttpRequest() || typeof XDomainRequest !== "undefined",
+	// "CORS": 'withCredentials' in new XMLHttpRequest() || typeof XDomainRequest !== "undefined",
 
 	// IE9及以上
 	"HTMLElement.prototype": !!(typeof HTMLElement !== "undefined" && HTMLElement.prototype && HTMLElement.prototype.appendChild),
@@ -30,6 +30,9 @@ var support = {
 	// IE10及以上
 	"atob": !!window.atob,
 	"btoa": !!window.btoa,
+	"CORS": 'withCredentials' in new XMLHttpRequest(),
+
+	"mediaDevices": !!(navigator.mediaDevices && navigator.mediaDevices.enumerateDevices),
 
 	// IE11还不支持，edge才支持
 	"promise": typeof Promise !== "undefined"

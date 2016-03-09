@@ -1,1 +1,1 @@
-"星期" + "日一二三四五六".charAt(new Date().getDay())
+"星期" + "日一二三四五六".charAt(new Date().getDay());

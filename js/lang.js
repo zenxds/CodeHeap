@@ -6,14 +6,6 @@ function isType(type) {
     };
 }
 
-(function(global) {
-
-})(this);
-
-var global = (function() {
-    return this || (1, eval)('this');
-})();
-
 var each = function(object, fn, context) {
     var i = 0,
         length = object.length;
@@ -75,29 +67,6 @@ var singleton = function(fn) {
     });
 };
 
-if (!Object.create) {
-    var Ctor = function() {};
-    // See: http://jsperf.com/object-create-vs-new-ctor
-    Object.create = Object.__proto__ ? function(proto) {
-        return {
-            __proto__: proto
-        };
-    } : function(proto) {
-        Ctor.prototype = proto;
-        return new Ctor();
-    };
-}
-
-// 生成cid
-var generateCid = function(prefix) {
-    var counter = 0;
-    return prefix ? function() {
-        return prefix + counter++;
-    } : function() {
-        return counter++;
-    };
-};
-
 // 深拷贝
 var deepCopy = function(src, target) {
     if (!src || typeof src !== "object") {
@@ -109,6 +78,23 @@ var deepCopy = function(src, target) {
     for (var i in src) {
         if (src.hasOwnProperty(i)) {
             target[i] = typeof src[i] === "object" ? deepCopy(src[i]) : src[i];
+        }
+    }
+    return target;
+};
+
+var extend = function(target) {
+    var args = [].slice.call(arguments);
+    var length = args.length;
+    var source, prop;
+
+    for (var i = 1; i < length; i++) {
+        source = args[i];
+
+        for (prop in source) {
+            if (source.hasOwnProperty(prop)) {
+                target[prop] = source[prop];
+            }
         }
     }
     return target;
@@ -183,29 +169,32 @@ var getter = function(val) {
 
 var poll = function(fn, interval, timeout) {
     timeout = timeout || 10000;
-    return new Promise(function(resolve, reject) {
-        var result = fn();
+    interval = interval || 200;
 
-        if (result) {
-            resolve(result);
-        } else {
-            var cost = 0;
-            var timer = setInterval(function() {
-                cost += interval;
+    var defer = Promise.defer();
 
-                result = fn();
-                if (result) {
+    var result = fn();
+    if (result) {
+        defer.resolve(result);
+    } else {
+        var cost = 0;
+        var timer = setInterval(function() {
+            cost += interval;
+
+            result = fn();
+            if (result) {
+                clearInterval(timer);
+                defer.resolve(result);
+            } else {
+                if (cost >= timeout) {
                     clearInterval(timer);
-                    resolve(result);
-                } else {
-                    if (cost >= timeout) {
-                        clearInterval(timer);
-                        reject();
-                    }
+                    defer.reject();
                 }
-            }, interval);
-        }
-    });
+            }
+        }, interval);
+    }
+
+    return defer.promise;
 };
 
 var log = function(url) {
@@ -219,3 +208,46 @@ var log = function(url) {
     };
     img.src = url;
 }
+
+(function() {
+    const isObject = isType('Object')
+    const isArray = Array.isArray || isType('Array')
+
+    var isPlainObject = obj => (isObject(obj) && (Object.getPrototypeOf(obj) === Object.prototype))
+
+    function merge(target) {
+        target = target || {}
+        var sources = [].slice.call(arguments, 1)
+
+        sources.forEach(source => {
+            source = source || {}
+
+            for (var key in source) {
+                var src = target[key]
+                var copy = source[key]
+
+                if (src === copy) {
+                    continue
+                }
+
+                if (isArray(copy)) {
+                    target[key] = merge(isArray(src) ? src : [], copy)
+                } else if (isPlainObject(copy)) {
+                    target[key] = merge(isPlainObject(src) ? src : {}, copy)
+                } else if (copy !== undefined) {
+                    target[key] = copy
+                }
+            }
+        })
+
+        return target;
+    }
+
+    function isType(type) {
+        return obj => ({}.toString.call(obj) == '[object ' + type + ']')
+    }
+
+    module.exports = {
+        merge: merge
+    }
+})

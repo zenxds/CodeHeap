@@ -45,3 +45,46 @@ function fun1() {
 
 // 不要忘了最后的catch
 // a().then(function() { retunr promiseA; }).then(function() { retunr promiseB; }).catch()
+
+var getData = function() {
+    var deferred = $.Deferred();
+
+    $.getJSON(api, function(data){
+        deferred.resolve(data[0]);
+    });
+
+    return deferred.promise();
+}
+
+var getImg = function(src) {
+    var deferred = $.Deferred();
+
+    var img = new Image();
+
+    img.onload = function() {
+        deferred.resolve(img);
+    };
+
+    img.src = src;
+
+    return deferred.promise();
+}
+
+var showImg = function(img) {
+    $(img).appendTo($('#container'));
+}
+
+getData()
+.then(getImg)
+.then(showImg);
+
+var defer = function() {
+    var deferred = {};
+
+    deferred.promise = new Promise(function(resolve, reject) {
+        deferred.resolve = resolve;
+        deferred.reject = reject;
+    });
+
+    return deferred;
+};

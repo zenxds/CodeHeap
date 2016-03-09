@@ -1,0 +1,6 @@
+WARNING  2013-01-02 15:43:34,685 log.py,27  --  warning
+ERROR    2013-01-02 15:43:34,685 log.py,28  --  error
+WARNING  2013-01-02 15:43:35,801 log.py,27  --  warning
+ERROR    2013-01-02 15:43:35,801 log.py,28  --  error
+WARNING  2013-01-02 15:43:37,144 log.py,27  --  warning
+ERROR    2013-01-02 15:43:37,145 log.py,28  --  error

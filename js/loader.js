@@ -1,4 +1,6 @@
 var head = document.head || document.getElementsByTagName("head")[0];
+var win = window;
+var doc = document;
 
 function loadScript(url, callback) {
     var node = document.createElement("script");
@@ -99,4 +101,80 @@ function pollCss(node, callback) {
             pollCss(node, callback);
         }
     }, 20);
+}
+
+var log = function(url) {
+    var img = new Image();
+
+    var random = '_img_' + String(Math.random()).substring(2);
+    win[random] = img;
+
+    img.onload = img.onerror = function() {
+        win[random] = null;
+    };
+    img.src = url;
+}
+
+
+var jsonp = function(url, data) {
+    var defer = Promise.defer();
+
+    var script = doc.createElement("script"),
+        fn = '_' + String(Math.random()).substring(2),
+        param = [];
+
+    param.push('data=' + encodeURIComponent(data));
+    param.push('_callback=' + fn);
+    // 构造URL
+    url += url.indexOf('?') > 0 ? '&' : '?';
+    url += param.join('&');
+
+    script.src = url;
+    win[fn] = function(d) {
+        defer.resolve(d);
+
+        try {
+            head.removeChild(script);
+            delete win[fn];
+        } catch (e) {}
+    };
+    head.appendChild(script);
+
+    return defer.promise;
+}
+
+var post = function(url, data) {
+    var defer = Promise.defer();
+
+    var supportCORS = typeof XMLHttpRequest !== "undefined" && 'withCredentials' in new XMLHttpRequest();
+
+    if (!supportCORS) {
+        defer.reject(new Error('client don\'t support CORS'));
+        return defer.promise;
+    }
+
+    var xhr,
+        method = 'POST',
+        handler = function() {
+            var text = xhr && xhr.responseText;
+            defer.resolve(JSON.parse(text || '{}'));
+        },
+        onerror = function(e) {
+            defer.reject(e);
+        };
+
+    try {
+        xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.withCredentials = true;
+        if (xhr.setRequestHeader) {
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        }
+        xhr.onload = handler;
+        xhr.onerror = onerror;
+
+        xhr.send('data=' + encodeURIComponent(data));
+    } catch (e) {}
+
+    return defer.promise;
 }

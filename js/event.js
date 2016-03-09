@@ -12,7 +12,7 @@ $('body').on('keyup', function(event) {
     } else {
         handle(event.clientX, event.clientY);   // 不要分发event对象，而是使用所需数据
     }
-    
+
 });
 
 var handle = function(x, y) {
@@ -36,5 +36,5 @@ var getEvents = function() {
             ret.push(i);
         }
     }
-    return ret.join(', ');
+    return ret.join('\n');
 };
