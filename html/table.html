@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background: #eee;
+    }
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #fff;
+    }
+    td {
+        text-align: center;
+        word-wrap:break-word; word-break:break-all;
+    }
+    .col1 {
+        width: 20%;
+        background: red;
+    }
+    .col2 {
+        width: 30%;
+        background: green;
+    }
+    .col3 {
+        width: 50%;
+        background: blue;
+    }
+    </style>
+</head>
+<body>
+    <table>
+        <colgroup>
+            <col class="col1" />
+            <col class="col2" />
+            <col class="col3" />
+        </colgroup>
+        <tr>
+            <th>col1</th>
+            <th>col2</th>
+            <th>col3</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333</td>
+        </tr>
+    </table>
+</body>
+</html>
