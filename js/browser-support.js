@@ -3,6 +3,7 @@ var canvasElem = document.createElement('canvas');
 var support = {
 	"plugins": !!navigator.plugins,
 	"mimeTypes": !!navigator.mimeTypes,
+	"styleSheets": !!document.styleSheets,
 
 
 	// IE特有，10及以下版本
@@ -30,7 +31,7 @@ var support = {
 	// IE10及以上
 	"atob": !!window.atob,
 	"btoa": !!window.btoa,
-	"CORS": 'withCredentials' in new XMLHttpRequest(),
+	"CORS": window.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest(),
 
 	"mediaDevices": !!(navigator.mediaDevices && navigator.mediaDevices.enumerateDevices),
 
