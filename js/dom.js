@@ -36,6 +36,10 @@ var toArray = function(nodes) {
 };
 
 function hasClass(elem, className) {
+    if (!className) {
+        return false
+    }
+
     if (elem.classList) {
         return elem.classList.contains(className);
     } else {
@@ -44,7 +48,7 @@ function hasClass(elem, className) {
 }
 
 function addClass(elem, className) {
-    if (hasClass(elem, className)) {
+    if (!className || hasClass(elem, className)) {
         return
     }
 
@@ -56,7 +60,7 @@ function addClass(elem, className) {
 }
 
 function removeClass(elem, className) {
-    if (!hasClass(elem, className)) {
+    if (!className || !hasClass(elem, className)) {
         return
     }
 

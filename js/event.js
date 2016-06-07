@@ -59,6 +59,10 @@ var EventUtil = {
         }
     },
 
+    getEvent: function(event){
+        return event ? event : window.event;
+    },
+
     getTarget: function(event) {
         return event.target || event.srcElement;
     },
