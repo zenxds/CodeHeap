@@ -44,17 +44,25 @@ function hasClass(elem, className) {
 }
 
 function addClass(elem, className) {
+    if (hasClass(elem, className)) {
+        return
+    }
+
     if (elem.classList) {
         elem.classList.add(className);
-    } else if (!hasClass(elem, className)){
+    } else {
         elem.className += " " + className;
     }
 }
 
 function removeClass(elem, className) {
+    if (!hasClass(elem, className)) {
+        return
+    }
+
     if (elem.classList) {
         elem.classList.remove(className);
-    } else if (hasClass(elem, className)) {
+    } else {
         elem.className = elem.className.replace(new RegExp('(\\s|^)' + className + '(\\s|$)'), ' ');
     }
 }
