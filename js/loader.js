@@ -3,7 +3,7 @@ var win = window;
 var doc = document;
 
 function loadScript(url, callback) {
-    var node = document.createElement("script");
+    var node = doc.createElement("script");
 
     node.charset = "utf-8";
     node.async = true;
@@ -33,7 +33,7 @@ var ua = navigator.userAgent;
 var isOldWebKit = +ua.replace(/.*(?:AppleWebKit|AndroidWebKit)\/?(\d+).*/i, "$1") < 536;
 
 function loadCss(url, callback) {
-    var node = document.createElement('link');
+    var node = doc.createElement('link');
 
     node.charset = 'utf-8';
     node.rel = 'stylesheet';
@@ -65,6 +65,19 @@ function loadCss(url, callback) {
     head.appendChild(node);
 
 }
+
+function loadScriptString(code) {
+    var script = doc.createElement("script")
+
+    try {
+        script.appendChild(doc.createTextNode(code))
+    } catch (ex) {
+        script.text = code
+    }
+
+    doc.body.appendChild(script)
+}
+
 
 function pollCss(node, callback) {
     var sheet = node.sheet;
