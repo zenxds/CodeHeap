@@ -81,5 +81,15 @@ var EventUtil = {
         } else {
             event.cancelBubble = true;
         }
+    },
+
+    getPageX: function(event) {
+        var pageX = event.pageX;
+
+        if (pageX === undefined){
+            pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+        }
+
+        return pageX
     }
 };
