@@ -1,6 +1,24 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+'''
+List
+'''
+# [].append('abc')
+# [].insert(i, 'abc')
+# [].pop() [].pop(i)
+
+'''
+Dict
+'''
+# d.get('k', 1)
+# d.pop('k')
+
+
+# [x * x for i in range(1, 10) if x % 2 == 0]
+# [m + n for m in 'ABC' for n in 'XYZ']
+# 生成器 (m + n for m in 'ABC' for n in 'XYZ')
+
 def fun():
     pass
 

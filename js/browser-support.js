@@ -19,6 +19,7 @@ var support = {
 	// "CORS": 'withCredentials' in new XMLHttpRequest() || typeof XDomainRequest !== "undefined",
 
 	// IE9及以上
+	"scriptOnLoad": 'onload' in document.createElement('script'),
 	"HTMLElement.prototype": !!(typeof HTMLElement !== "undefined" && HTMLElement.prototype && HTMLElement.prototype.appendChild),
 	"canvas": !!(canvasElem.getContext && canvasElem.getContext('2d')),
 	"es5": !!Function.prototype.bind,

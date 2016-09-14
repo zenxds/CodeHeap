@@ -6,10 +6,11 @@
 </head>
 <body>
 <input type="text" id="demo">
-    <script src="http://static.tianxia.taobao.com/tbtx/base/gallery/jquery/1.11.1/jquery.js"></script>
+<div id="result"></div>
     <script>
         var handler = function() {
-            console.log(element.value);
+            document.getElementById('result').innerHTML = element.value
+            // console.log(element.value);
         };
 
         var element = document.getElementById('demo');

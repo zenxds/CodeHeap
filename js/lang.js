@@ -124,6 +124,10 @@ var choice = function(m, n) {
     return array ? array[random] : random;
 };
 
+function random(min, max) {
+    return min + Math.floor(Math.random() * (max - min + 1))
+}
+
 /*
  * http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
  * 洗牌算法
@@ -154,6 +158,19 @@ var shuffle = function(array) {
     }
     return array;
 };
+
+var shuffle = function(array) {
+    var item, temp
+    for (var i = array.length - 1; i > 0; i--) {
+        item = parseInt(Math.random() * i)
+
+        temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+    }
+
+    return array
+}
 
 
 // 是否是闰年

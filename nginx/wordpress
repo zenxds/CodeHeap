@@ -5,6 +5,7 @@ server {
     index index.php index.html index.htm;
 
     server_name zenxds.com blog.zenxds.com;
+    charset utf-8;
 
     location / {
         try_files $uri $uri/ /index.php?q=$uri&$args;
@@ -12,6 +13,9 @@ server {
         if ( !-e $request_filename ) {
             rewrite . /blog/index.php last;
         }
+
+        autoindex on;
+        autoindex_localtime on;
     }
 
     location = / {
