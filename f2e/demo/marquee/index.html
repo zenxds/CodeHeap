@@ -25,7 +25,7 @@
         width: 1100px;
     }
     </style>
-    <script src="http://static.tianxia.taobao.com/tbtx/base/2.5/js/??tbtx.js,combo.js"></script>
+    <script src="http://img.miiee.com/tbtx/base/js/jquery/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 
@@ -38,7 +38,6 @@
     </div>
 
     <script>
-    require("jquery", function() {
         // 复制一份，无限滚动
 
         var $marquee = $(".marquee"),
@@ -65,10 +64,9 @@
             clearInterval(timer);
         };
 
-        setTimeout(start, 200);
+        // setTimeout(start, 200);
 
         $marquee.on("mouseenter", stop).on("mouseleave", start);
-    });
     </script>
 </body>
 </html>

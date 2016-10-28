@@ -17,7 +17,7 @@
         line-height: 20px;
     }
     </style>
-    <script src="http://static.tianxia.taobao.com/tbtx/base/2.5/js/??tbtx.js,combo.js"></script>
+    <script src="http://img.miiee.com/tbtx/base/js/jquery/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 
@@ -31,31 +31,29 @@
 </div>
 
     <script>
-    require("jquery", function($) {
-        var list = $("ul");
+    var list = $("ul");
 
-        var timer = null,
-            height = 40,
-            scroll = function() {
-                list.animate({
-                    marginTop: -height
-                }, function() {
-                    list.find("li:lt(2)").appendTo(list);
-                    list.css("marginTop", 0);
-                });
-            },
-            auto = function() {
-                clear();
-                timer = setInterval(scroll, 3000);
-            },
-            clear = function() {
-                clearInterval(timer);
-                timer = null;
-            };
+    var timer = null,
+        height = 40,
+        scroll = function() {
+            list.animate({
+                marginTop: -height
+            }, function() {
+                list.find("li:lt(2)").appendTo(list);
+                list.css("marginTop", 0);
+            });
+        },
+        auto = function() {
+            clear();
+            timer = setInterval(scroll, 3000);
+        },
+        clear = function() {
+            clearInterval(timer);
+            timer = null;
+        };
 
-        auto(true);
-        list.on("mouseenter", clear).on("mouseleave", auto);
-    });
+    auto(true);
+    list.on("mouseenter", clear).on("mouseleave", auto);
     </script>
 </body>
 </html>
