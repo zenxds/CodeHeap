@@ -44,12 +44,12 @@ var truncate = function(str, length, truncation) {
     truncation = truncation || "...";
 
     return str.length > length ?
-        str.slice(0, length - truncation.length) + truncation: str;
+        str.slice(0, length - truncation.length) + truncation : str;
 };
 
 // - _
 // 转为驼峰风格
-var camelize = function(str){
+var camelize = function(str) {
     if (str.indexOf("-") < 0 && str.indexOf("_") < 0) {
         return str;
     }
@@ -87,11 +87,11 @@ var stripScripts = function(str) {
 
 // 把字符串转为安全的正则源码
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-function escapeRegExp(string){
+function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function doc (fn) {
+function doc(fn) {
     // 1. 移除起始的 function(){ /*!
     // 2. 移除末尾的 */ }
     // 3. 移除起始和末尾的空格
@@ -99,4 +99,4 @@ function doc (fn) {
         .replace(/^[^\/]+\/\*!?/, '')
         .replace(/\*\/[^\/]+$/, '')
         .trim()
-},
+}
