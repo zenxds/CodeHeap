@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    img {
+      display: block;
+    }
+
+    .demo {
+      width: 520px;
+      overflow: hidden;
+      margin: 20px auto;
+      border: 1px solid #900;
+    }
+    ul {
+      width: 2080px;
+      font-size: 0;
+    }
+    li {
+      display: inline-block;
+      font-size: 14px;
+      width: 520px;
+    }
+
+    #demo-5 {
+      position: relative;
+      height: 280px;
+    }
+    #demo-5 li {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease-in-out;
+    }
+    #demo-5 .active,
+    #demo-5 .in {
+      transform: translateX(-100%);
+    }
+    #demo-5 .active,
+    #demo-5 .next {
+      display: block;
+    }
+    #demo-5 .out {
+      transform: translateX(-200%);
+    }
+
+    #demo-6 {
+      position: relative;
+      height: 280px;
+    }
+    #demo-6 li {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #demo-6 li:nth-child(1) {
+    }
+    #demo-6 li:nth-child(2) {
+    }
+    #demo-6 li:nth-child(3) {
+      animation-delay: 3s;
+    }
+    #demo-6 li:nth-child(4) {
+      animation-delay: 6s;
+    }
+
+    .animate li {
+      animation: slide 12s 0s linear infinite;
+    }
+    .animate li:nth-child(1) {
+      animation-name: slide-first;
+    }
+
+    @keyframes slide-first {
+      0% {
+        transform: translateX(-100%);
+      }
+      22.5% {
+        transform: translateX(-100%);
+      }
+      25% {
+        transform: translateX(-200%);
+        opacity: 1;
+      }
+      30% {
+        transform: translateX(-200%);
+        opacity: 0;
+      }
+      35% {
+        transform: translateX(0);
+        opacity: 0;
+      }
+      40% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      97.5% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      22.5% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-100%);
+      }
+
+      47.5% {
+        transform: translateX(-100%);
+      }
+      50% {
+        transform: translateX(-200%);
+        opacity: 1;
+      }
+      55% {
+        transform: translateX(-200%);
+        opacity: 0;
+      }
+      60% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      97.5% {
+        transform: translateX(100%);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="demo-1" class="demo">
+    <ul>
+      <li><img src="https://img.alicdn.com/tps/TB1cuJ6OXXXXXctXXXXXXXXXXXX-520-280.jpg"></li>
+      <li><img src="https://img.alicdn.com/simba/img/TB1NUvAOXXXXXbWXVXXSutbFXXX.jpg"></li>
+      <li><img src="https://ossgw.alicdn.com/creatives-assets/f5567768-b901-47b0-b005-5b0cc67b5a70.jpg"></li>
+      <li><img src="https://img.alicdn.com/tps/TB1dnUfNVXXXXaGaFXXXXXXXXXX-520-280.jpg"></li>
+    </ul>
+  </div>
+
+  <div id="demo-2" class="demo">
+    <ul>
+      <li><img src="https://img.alicdn.com/tps/TB1cuJ6OXXXXXctXXXXXXXXXXXX-520-280.jpg"></li>
+      <li><img src="https://img.alicdn.com/simba/img/TB1NUvAOXXXXXbWXVXXSutbFXXX.jpg"></li>
+      <li><img src="https://ossgw.alicdn.com/creatives-assets/f5567768-b901-47b0-b005-5b0cc67b5a70.jpg"></li>
+      <li><img src="https://img.alicdn.com/tps/TB1dnUfNVXXXXaGaFXXXXXXXXXX-520-280.jpg"></li>
+    </ul>
+  </div>
+
+  <div id="demo-3" class="demo">
+    <ul>
+      <li><img src="https://img.alicdn.com/tps/TB1cuJ6OXXXXXctXXXXXXXXXXXX-520-280.jpg"></li>
+      <li><img src="https://img.alicdn.com/simba/img/TB1NUvAOXXXXXbWXVXXSutbFXXX.jpg"></li>
+      <li><img src="https://ossgw.alicdn.com/creatives-assets/f5567768-b901-47b0-b005-5b0cc67b5a70.jpg"></li>
+      <li><img src="https://img.alicdn.com/tps/TB1dnUfNVXXXXaGaFXXXXXXXXXX-520-280.jpg"></li>
+    </ul>
+  </div>
+
+  <div id="demo-4" class="demo">
+    <ul>
+      <li><img src="https://img.alicdn.com/tps/TB1cuJ6OXXXXXctXXXXXXXXXXXX-520-280.jpg"></li>
+      <li><img src="https://img.alicdn.com/simba/img/TB1NUvAOXXXXXbWXVXXSutbFXXX.jpg"></li>
+      <li><img src="https://ossgw.alicdn.com/creatives-assets/f5567768-b901-47b0-b005-5b0cc67b5a70.jpg"></li>
+      <li><img src="https://img.alicdn.com/tps/TB1dnUfNVXXXXaGaFXXXXXXXXXX-520-280.jpg"></li>
+    </ul>
+  </div>
+
+  <ul id="demo-5" class="demo">
+    <li class="active"><img src="https://img.alicdn.com/tps/TB1cuJ6OXXXXXctXXXXXXXXXXXX-520-280.jpg"></li>
+    <li class="next"><img src="https://img.alicdn.com/simba/img/TB1NUvAOXXXXXbWXVXXSutbFXXX.jpg"></li>
+    <li><img src="https://ossgw.alicdn.com/creatives-assets/f5567768-b901-47b0-b005-5b0cc67b5a70.jpg"></li>
+    <li><img src="https://img.alicdn.com/tps/TB1dnUfNVXXXXaGaFXXXXXXXXXX-520-280.jpg"></li>
+  </ul>
+
+  <ul id="demo-6" class="demo">
+    <li><img src="https://img.alicdn.com/tps/TB1cuJ6OXXXXXctXXXXXXXXXXXX-520-280.jpg"></li>
+    <li><img src="https://img.alicdn.com/simba/img/TB1NUvAOXXXXXbWXVXXSutbFXXX.jpg"></li>
+    <li><img src="https://ossgw.alicdn.com/creatives-assets/f5567768-b901-47b0-b005-5b0cc67b5a70.jpg"></li>
+    <li><img src="https://img.alicdn.com/tps/TB1dnUfNVXXXXaGaFXXXXXXXXXX-520-280.jpg"></li>
+  </ul>
+</div>
+
+<script src="jquery.js"></script>
+<script>
+
+/**
+ * transitionend在chrome tab不激活的时候不触发。
+ */
+(function($) {
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () {
+      called = true
+    })
+
+    var callback = function () {
+      if (!called) {
+        $($el).trigger('transitionend')
+      }
+    }
+    setTimeout(callback, duration)
+    return this
+  }
+})(jQuery);
+
+// demo1，非无限轮播
+(function($) {
+  var $container = $('#demo-1')
+  var $panels = $container.find('li')
+  var $content = $container.find('ul')
+
+  var activeIndex = 0
+  var width = $panels.width()
+  var length = $panels.length
+
+  setInterval(function() {
+    activeIndex = (activeIndex + 1) % length
+    $content.css({
+      transition: 'all 0.3s ease-in-out',
+      transform: 'translateX(-' + (activeIndex * width) + 'px)'
+    })
+  }, 3000);
+})(jQuery);
+
+// demo2，克隆无限轮播
+(function($) {
+  var $container = $('#demo-2')
+  var $panels = $container.find('li')
+  var $content = $container.find('ul')
+
+  var activeIndex = 0
+  var width = $panels.width()
+  var length = $panels.length
+
+  // 克隆一个节点
+  $content.append($panels.eq(0).clone())
+  $content.width(width * (length + 1))
+
+  setInterval(function() {
+    activeIndex = (activeIndex + 1) % (length + 1)
+
+    $content.one('transitionend', function() {
+      if (activeIndex === length) {
+        activeIndex = 0
+        $content.css({
+          transition: '',
+          transform: 'translateX(0)'
+        })
+      }
+    }).emulateTransitionEnd(300)
+
+    $content.css({
+      transition: 'all 0.3s ease-in-out',
+      transform: 'translateX(-' + (activeIndex * width) + 'px)'
+    })
+  }, 3000)
+})(jQuery);
+
+// demo3，不断appendChild无限轮播
+(function($) {
+  var $container = $('#demo-3')
+  var $panels = $container.find('li')
+  var $content = $container.find('ul')
+
+  var width = $panels.width()
+
+  setInterval(function() {
+
+    $content.one('transitionend', function() {
+      $content.append($container.find('li:first'))
+
+      $content.css({
+        transition: '',
+        transform: 'translateX(0)'
+      })
+    }).emulateTransitionEnd(300)
+
+    $content.css({
+      transition: 'all 0.3s ease-in-out',
+      transform: 'translateX(-' + (width) + 'px)'
+    })
+  }, 3000)
+})(jQuery);
+
+// demo4，偏移第一个元素的无限轮播
+(function($) {
+  var $container = $('#demo-4')
+  var $panels = $container.find('li')
+  var $content = $container.find('ul')
+
+  var activeIndex = 0
+  var width = $panels.width()
+  var length = $panels.length
+
+  setInterval(function() {
+    activeIndex += 1
+
+    $content.one('transitionend', function() {
+      if (activeIndex === length - 1) {
+        $panels.eq(0).css({
+          transform: 'translateX(' + (length * width) + 'px)'
+        })
+      }
+
+      if (activeIndex == length) {
+        activeIndex = 0
+
+        $panels.eq(0).css({
+          transform: 'translateX(0)'
+        })
+        $content.css({
+          transition: '',
+          transform: 'translateX(0)'
+        })
+      }
+    }).emulateTransitionEnd(300)
+
+    $content.css({
+      transition: 'all 0.3s ease-in-out',
+      transform: 'translateX(-' + (activeIndex * width) + 'px)'
+    })
+  }, 3000)
+})(jQuery);
+
+// demo5，绝对定位的无限轮播
+(function($) {
+  var $container = $('#demo-5')
+  var $panels = $container.find('li')
+
+  var activeIndex = 0
+  var nextIndex = 1
+  var width = $panels.width()
+  var length = $panels.length
+
+  setInterval(function() {
+    $panels.eq(activeIndex).one('transitionend', function() {
+      $panels.eq(activeIndex).toggleClass('out active')
+      $panels.eq(nextIndex).toggleClass('in next active')
+
+      activeIndex = nextIndex
+      nextIndex = (activeIndex + 1) % length
+
+      $panels.eq(nextIndex).addClass('next')
+    }).emulateTransitionEnd(300)
+
+    $panels.eq(activeIndex).addClass('out')
+    $panels.eq(nextIndex).addClass('in')
+  }, 3000)
+})(jQuery);
+
+
+(function($) {
+  $('#demo-6').addClass('animate')
+})(jQuery);
+</script>
+</body>
+</html>

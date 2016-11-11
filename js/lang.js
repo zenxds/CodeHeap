@@ -183,6 +183,16 @@ var getter = function(val) {
     return Math.round(val * 100)/100;
 };
 
+var rafCheck = function(condition, callback) {
+    var check = () => {
+        if (condition()) {
+            callback()
+        } else {
+            raf(check)
+        }
+    }
+    raf(check)
+}
 
 var poll = function(fn, interval, timeout) {
     timeout = timeout || 10000;
