@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #demo {
+       /* 人眼与z=0的距离，可以写在共同父元素上和真正动画的元素transform属性上 */
+      perspective: 800px;
+      perspective-origin: 50% 50%;
+    }
+
+    #block {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 40px auto;
+
+      /*设置了 preserve-3d 属性的元素会生成一个3D的空间，将所有的子元素（不是后代元素）都囊括在这个3D空间内。*/
+      transform-style: preserve-3d;
+    }
+    .page {
+      position: absolute;
+      width: 500px;
+      line-height: 500px;
+      text-align: center;
+      font-size: 100px;
+      background: #000;
+      color: #fff;
+
+      transition: all 1s linear;
+      transform: rotateX(90deg);
+      transform-origin: bottom;
+      backface-visibility: hidden;
+    }
+    .page.in {
+      transform: rotateX(0);
+    }
+  </style>
+</head>
+<body>
+  <div id="demo">
+    <div id="block">
+      <div class="page in">1</div>
+      <div class="page">2</div>
+      <div class="page">3</div>
+      <div class="page">4</div>
+      <div class="page">5</div>
+      <div class="page">6</div>
+      <div class="page">7</div>
+      <div class="page">8</div>
+      <div class="page">9</div>
+      <div class="page">10</div>
+    </div>
+
+  </div>
+<script>
+
+(function() {
+  var activeIndex = 0
+  var $pages = document.getElementsByClassName('page')
+
+  var timer = setInterval(function() {
+    $pages[activeIndex].style.transform = 'rotateX(-90deg)'
+
+    activeIndex = activeIndex + 1
+
+    $pages[activeIndex].style.transform = 'rotateX(0)'
+
+    if (activeIndex === $pages.length - 1) {
+      clearInterval(timer)
+    }
+  }, 1000)
+})()
+
+</script>
+</body>
+</html>

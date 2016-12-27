@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <canvas width="300" height="300" />
+
+  <script>
+    var canvas = document.getElementsByTagName('canvas')[0]
+    var ctx = canvas.getContext('2d')
+
+    ctx.lineWidth = 300
+    ctx.strokeStyle = '#f00'
+    ctx.beginPath()
+
+    ctx.moveTo(0, 0)
+    ctx.lineTo(0, 150)
+    ctx.stroke()
+  </script>
+</body>
+</html>

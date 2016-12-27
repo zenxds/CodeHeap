@@ -37,6 +37,10 @@ function byteCount(s) {
     return encodeURI(s).split(/%..|./).length - 1;
 }
 
+var ucfirst = function(str) {
+    return str.charAt(0).toUpperCase() + str.substring(1);
+}
+
 // 字符串截断， 超出省略号
 var truncate = function(str, length, truncation) {
     length = length || 30;

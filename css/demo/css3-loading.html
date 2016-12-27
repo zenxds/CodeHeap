@@ -6,38 +6,19 @@
     <link rel="stylesheet" href="http://static.tianxia.taobao.com/tbtx/base/2.0/css/reset.css">
     <style>
     .loading:after {
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: bottom;
-    -webkit-animation: ellipsis 2s infinite;
-    -moz-animation: ellipsis 2s infinite;
-    animation: ellipsis 2s infinite;
-    content: "\2026"; /* ascii code for the ellipsis character */
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+      animation: ellipsis 2s infinite;
+      content: "\2026"; /* ascii code for the ellipsis character */
     }
-    @-moz-keyframes ellipsis {
+    @keyframes ellipsis {
         from {
             width: 2px;
         }
         to {
             width: 15px;
         }
-    }
-    @-moz-keyframes ellipsis {
-      from {
-        width: 2px;
-      }
-      to {
-        width: 15px;
-      }
-    }
-
-    @-webkit-keyframes ellipsis {
-      from {
-        width: 2px;
-      }
-      to {
-        width: 15px;
-      }
     }
     </style>
 </head>

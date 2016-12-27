@@ -204,7 +204,7 @@
   </ul>
 </div>
 
-<script src="jquery.js"></script>
+<script src="../jquery.js"></script>
 <script>
 
 /**
@@ -214,7 +214,7 @@
   $.fn.emulateTransitionEnd = function (duration) {
     var called = false
     var $el = this
-    $(this).one('bsTransitionEnd', function () {
+    $(this).one('transitionend', function () {
       called = true
     })
 
