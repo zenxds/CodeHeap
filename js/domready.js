@@ -1,9 +1,15 @@
 /**
  * thanks to https://github.com/jquery/jquery/blob/1.12-stable/src/core/ready.js
  */
+let isReady = false
 const readyDefer = Promise.defer()
 
 function ready() {
+  if (isReady) {
+    return
+  }
+
+  isReady = true
   readyDefer.resolve() 
 }
 
