@@ -18,4 +18,20 @@ function transitionEnd() {
     return transEndEventNames.transition;
 }
 
+function getAnimationendEvent() {
+  const el = document.createElement("fakeelement")
+  const animations = {
+    "animation"      : "animationend",
+    "OAnimation"     : "oAnimationEnd",
+    "MozAnimation"   : "animationend",
+    "WebkitAnimation": "webkitAnimationEnd"
+  }
+
+  for (let i in animations) {
+    if (el.style[i] !== undefined) {
+      return animations[i]
+    }
+  }  
+}
+
 // isSupportOverflowScrolling: "WebkitOverflowScrolling" in document.documentElement.style

@@ -1,0 +1,55 @@
+/* 单行文字溢出时出现省略号，需设定宽度 */
+.fn-text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 需要设定为block元素 */
+.fn-hide-text {
+  display: block;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+/* 强制换行 IE67 need layout*/
+.fn-wrap {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.fn-invisible {
+  visibility: hidden;
+}
+
+.fn-hide {
+  display: none;
+}
+
+.fn-show {
+  display: block;
+}
+
+.image-set(@url, @suffix: 'png') {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url("@{url}.@{suffix}");
+  background-image: image-set(url("@{url}.@{suffix}") 1x, url("@{url}@2.@{suffix}") 2x);
+}
+
+.lighter {
+  font-weight: 300;
+}
+
+.square(@size) {
+  width: @size;
+  height: @size;
+}
+
+.center() {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
