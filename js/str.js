@@ -104,3 +104,16 @@ function doc(fn) {
         .replace(/\*\/[^\/]+$/, '')
         .trim()
 }
+
+function hexToRgba(color, opacity) {
+  color = color.replace('#', '')
+
+  if (color.length === 3) {
+    color = color.charAt(0) + color.charAt(0) + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2)
+  }
+
+  const r = parseInt(color.slice(0, 2), 16)
+  const g = parseInt(color.slice(2, 4), 16)
+  const b = parseInt(color.slice(4, 6), 16)
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`
+}

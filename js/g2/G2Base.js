@@ -11,7 +11,10 @@ export default class G2Base extends React.Component {
   }
 
   componentDidMount() {
-    this._initChart(this.props)
+    const props = this.props
+
+    this.setProps(props)    
+    this._initChart(props)
   }
 
   componentWillReceiveProps(newProps) {
@@ -19,12 +22,17 @@ export default class G2Base extends React.Component {
     const { data: oldData, width: oldWidth, height: oldHeight, plotCfg: oldPlotCfg } = this.props
     
     if (newData !== oldData) {
-      this.chart.changeData(this.processData(newData))
+      this.setProps(newProps)
+      this._initChart(newProps)
+
+      if (this.chart) {
+        this.chart.changeData(this.processData(newData))
+      }
     }
 
-    if (newWidth !== oldWidth || newHeight !== oldHeight) {
-      this.chart.changeSize(newWidth, newHeight);
-    }
+    // if (newWidth !== oldWidth || newHeight !== oldHeight) {
+    //   this.chart && this.chart.changeSize(newWidth, newHeight)
+    // }
   }
 
   componentWillUnmount() {
@@ -35,9 +43,17 @@ export default class G2Base extends React.Component {
   shouldComponentUpdate() {
     return false
   }
+  
 
   _initChart(props) {
     const { width, height, plotCfg, forceFit, data } = props
+
+    /**
+     * 防止一开始数据为空时图表渲染的比较奇怪
+     */
+    if (this.chart || !data.length) {
+      return
+    }
 
     const chart = new Chart({
       container: this.refs.container,
@@ -53,17 +69,19 @@ export default class G2Base extends React.Component {
   }
 
   /**
-   * 初始化chart
-   * 由子类重写
+   * 设置组件属性，由子类重写
    * @memberof G2Base
    */
-  initChart() {
-
-  }
+  setProps(props) {}
 
   /**
-   * 对原始数据进行处理
-   * 由子类重写
+   * 初始化chart，由子类重写
+   * @memberof G2Base
+   */
+  initChart() {}
+
+  /**
+   * 对原始数据进行处理，由子类重写
    * @memberof G2Base
    */
   processData(data) {
@@ -71,6 +89,6 @@ export default class G2Base extends React.Component {
   }
 
   render() {
-    return (<div ref="container" className="g-chart" />)
+    return (<div  className="g-chart"><div ref="container" style={{height: this.props.height}}></div></div>)
   }
 }
