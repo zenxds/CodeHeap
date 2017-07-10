@@ -1,17 +1,29 @@
 import test from 'ava'
-import { param, unparam } from './param'
+import { param, unparam } from '.'
 
-test(t => {
+test('param & unparm', t => {
   t.is(param({
-    a: 'a',
-    b: 'b',
-    c: '123'
-  }), 'a=a&b=b&c=123')
+    key1: 'a',
+    key2: 'a.b',
+    key3: 123
+  }), 'key1=a&key2=a.b&key3=123')
   
   t.deepEqual({
-    a: 'a',
-    b: 'b',
-    c: '123'
-  }, unparam('a=a&b=b&c=123'))
+    key1: 'a',
+    key2: 'a.b',
+    key3: '123'
+  }, unparam('key1=a&key2=a.b&key3=123'))
+})
+
+test('param & unparm array', t => {
+  t.is(param({
+    arr: ['a', 'b'],
+    key: 'val' 
+  }), 'arr%5B%5D=a&arr%5B%5D=b&key=val')
+  
+  t.deepEqual({
+    arr: ['a', 'b'],
+    key: 'val'
+  }, unparam('arr%5B%5D=a&arr%5B%5D=b&key=val'))
 })
 

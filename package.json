@@ -7,6 +7,7 @@
     "test": "ava"
   },
   "ava": {
+    "verbose": true,
     "files": [
       "js/**/*.spec.js"
     ],
@@ -16,12 +17,7 @@
     "require": [
       "babel-polyfill",
       "babel-register"
-    ],
-    "babel": {
-      "presets": [
-        "es2015"
-      ]
-    }
+    ]
   },
   "repository": {
     "type": "git",
