@@ -36,8 +36,10 @@ export default class G2Base extends React.Component {
   }
 
   componentWillUnmount() {
-    this.chart.destroy()
-    this.chart = null
+    if (this.chart) {
+      this.chart.destroy()
+      this.chart = null
+    }
   }
 
   shouldComponentUpdate() {
@@ -51,7 +53,7 @@ export default class G2Base extends React.Component {
     /**
      * 防止一开始数据为空时图表渲染的比较奇怪
      */
-    if (this.chart || !data.length) {
+    if (this.chart || !data || !data.length) {
       return
     }
 
