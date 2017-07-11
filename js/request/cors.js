@@ -1,3 +1,8 @@
+/**
+ * CORS POST
+ * @param {*} url 
+ * @param {*} data 
+ */
 const post = function (url, data) {
   const defer = Promise.defer()
   const supportCORS = typeof XMLHttpRequest !== "undefined" && 'withCredentials' in new XMLHttpRequest()

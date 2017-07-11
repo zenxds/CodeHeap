@@ -4,7 +4,7 @@
  */
 const log = url => {
   const img = new Image()
-  const random = '_img_' + Math.random()
+  const random = '_img_' + String(Math.random()).substring(2)
   window[random] = img
 
   img.onload = img.onerror = function () {
