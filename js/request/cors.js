@@ -1,39 +1,32 @@
+const supportCORS = typeof XMLHttpRequest !== "undefined" && 'withCredentials' in new XMLHttpRequest()
+
 /**
  * CORS POST
+ * 依赖param函数
  * @param {*} url 
  * @param {*} data 
  */
-const post = function (url, data) {
-  const defer = Promise.defer()
-  const supportCORS = typeof XMLHttpRequest !== "undefined" && 'withCredentials' in new XMLHttpRequest()
-  const method = 'POST'
-
+const post = (url, data) => new Promise((resolve, reject) => {
   if (!supportCORS) {
-    defer.reject(new Error('client don\'t support CORS'))
-    return defer.promise
+    reject(new Error('client don\'t support CORS'))
+    return
   }
 
-  let xhr
-  const handler = () => {
-    const text = xhr && xhr.responseText
-    defer.resolve(JSON.parse(text || '{}'))
+  const xhr = new XMLHttpRequest()
+  const onload = () => {
+    const text = xhr.responseText || '{ "success": false, "msg": "Empty responseText"}'
+    resolve(JSON.parse(text))
   }
   const onerror = (e) => {
-    defer.reject(e)
+    reject(e)
   }
 
-  try {
-    xhr = new XMLHttpRequest()
-    xhr.open(method, url, true)
-    xhr.withCredentials = true
-    if (xhr.setRequestHeader) {
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
-    }
-    xhr.onload = handler
-    xhr.onerror = onerror
-
-    xhr.send('data=' + encodeURIComponent(data))
-  } catch (e) {}
-
-  return defer.promise
-}
+  xhr.open('POST', url, true)
+  xhr.withCredentials = true
+  if (xhr.setRequestHeader) {
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
+  }
+  xhr.onload = onload
+  xhr.onerror = onerror
+  xhr.send(param(data))
+})
