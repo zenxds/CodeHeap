@@ -26,10 +26,10 @@ export function isElementInViewport(el) {
  * 元素任一部分在视口内
  */
 export function isAnyPartOfElementInViewport(el, threshold=0) {
-    const rect = el.getBoundingClientRect()
+  const rect = el.getBoundingClientRect()
 
-    const viewportHeight = getViewportHeight()
-    const verticalInView = (rect.top - threshold <= viewportHeight) && (rect.bottom + threshold >= 0)
+  const viewportHeight = getViewportHeight()
+  const verticalInView = (rect.top - threshold <= viewportHeight) && (rect.bottom + threshold >= 0)
 
-    return verticalInView
+  return verticalInView
 }
