@@ -50,3 +50,10 @@ const endsWith = (str, suffix) => {
   const index = str.length - suffix.length
   return index >= 0 && str.indexOf(suffix, index) === index
 }
+
+function mix(to, from) {
+  for (var i in from) {
+    to[i] = from[i]
+  }
+  return to
+}
