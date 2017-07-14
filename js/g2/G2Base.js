@@ -58,7 +58,7 @@ export default class G2Base extends React.Component {
     }
 
     const chart = new Chart({
-      container: this.refs.container,
+      container: this.container,
       data: this.processData(data),
       width,
       height,
@@ -91,6 +91,6 @@ export default class G2Base extends React.Component {
   }
 
   render() {
-    return (<div  className="g-chart"><div ref="container" style={{height: this.props.height}}></div></div>)
+    return (<div  className="g-chart"><div ref={div => { this.container = div }} style={{height: this.props.height}}></div></div>)
   }
 }
