@@ -4,9 +4,10 @@
 ```
 SHOW VARIABLES LIKE 'character%';
 
-set character_set_database=utf8;
+// 修改my.conf
+[mysqld]
 
-show collation;
+character_set_server=utf8
 
 ALTER DATABASE `kindle` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
