@@ -7,7 +7,7 @@ brew cask install docker
 
 ```
 docker pull node:8 // 下载镜像
-docker build . (.是构建上下文，被ADD 或 COPY 指令所引用)
+docker build . -t xx/xx(.是构建上下文，被ADD 或 COPY 指令所引用)
 
 // 启动容器
 docker run 镜像名 -v /data test
@@ -17,6 +17,9 @@ docker-compose build
 
 docker inspect
 docker exec -it xx /bin/bash
+
+                 --cap-add=SYS_ADMIN
+docker run -t -i --privileged zenxds/chrome /bin/bash
 
 // 备份
 docker run --rm --volumes-from mysql -v $(pwd)/backup:/backup debian cp -r /var/lib/mysql /backup/
