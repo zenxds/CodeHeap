@@ -89,3 +89,12 @@ function hexToRgba(color, opacity) {
   const b = parseInt(color.slice(4, 6), 16)
   return `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
+
+function randomStr(length) {
+  let str = ''
+
+  while (str.length < length) {
+    str += Math.random().toString(36).slice(2)
+  }
+  return str.substr(0, length)
+}
