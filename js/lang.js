@@ -34,23 +34,6 @@ const isLeapYear = (date) => {
   return new Date(date.getFullYear(), 2, 0).getDate() == 29
 }
 
-/**
- * 首字母大写
- * @param {*} str 
- */
-const ucfirst = str => {
-  return str.charAt(0).toUpperCase() + str.substring(1)
-}
-
-const startsWith = (str, prefix) => {
-  return str.lastIndexOf(prefix, 0) === 0
-}
-
-const endsWith = (str, suffix) => {
-  const index = str.length - suffix.length
-  return index >= 0 && str.indexOf(suffix, index) === index
-}
-
 function mix(to, from) {
   for (var i in from) {
     to[i] = from[i]

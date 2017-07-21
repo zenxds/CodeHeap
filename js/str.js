@@ -98,3 +98,20 @@ function randomStr(length) {
   }
   return str.substr(0, length)
 }
+
+/**
+ * 首字母大写
+ * @param {*} str 
+ */
+const ucfirst = str => {
+  return str.charAt(0).toUpperCase() + str.substring(1)
+}
+
+const startsWith = (str, prefix) => {
+  return str.lastIndexOf(prefix, 0) === 0
+}
+
+const endsWith = (str, suffix) => {
+  const index = str.length - suffix.length
+  return index >= 0 && str.indexOf(suffix, index) === index
+}
