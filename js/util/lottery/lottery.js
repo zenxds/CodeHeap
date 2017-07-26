@@ -10,7 +10,7 @@ class Lottery {
     const amount = pool.length
 
     for (let i = amount - 1, stop = amount - n - 1; i > stop; i--) {
-      let rand = Math.floor((i + 1) * Math.random())
+      let rand = Math.floor((i + 1) * Math.random());
       [pool[rand], pool[i]] = [pool[i], pool[rand]]
     }
 

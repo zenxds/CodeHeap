@@ -34,6 +34,18 @@ screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux
 ```
 COPY 从主机复制文件到镜像
 WORKDIR 对任何后续的 RUN、CMD、ENTRYPOINT、ADD 或 COPY 指令设置工作目录
+
+ENV TZ Asia/Shanghai
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+```
+
+## docker-compose
+
+```
+volumes:
+  - ~/.ssh:/root/.ssh
 ```
 
 ## 阿里云镜像
