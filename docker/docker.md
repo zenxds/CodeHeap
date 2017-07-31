@@ -27,6 +27,9 @@ docker run --rm --volumes-from mysql -v $(pwd)/backup:/backup debian cp -r /var/
 // mac上要先运行这条命令才能cd到/var/lib/docker里
 // https://stackoverflow.com/questions/38532483/where-is-var-lib-docker-on-mac-os-x
 screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+
+// 关掉已经停止的容器，并删除volume
+docker rm -v $(docker ps -aq -f status=exited)
 ```
 
 ## Dockerfile

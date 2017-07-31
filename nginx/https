@@ -1,8 +1,12 @@
 server {
-    listen       80;
-    server_name  www.dingxiang-inc.com;
-    error_log  /var/log/nginx/error.log;
-    access_log /var/log/nginx/access.log;
+    listen 80;
+    server_name  dingxiang-inc.net;
+    rewrite ^(.*) https://$host$1 permanent;
+}
+
+server {
+    listen       443;
+    server_name  dingxiang-inc.net;
 
     location / {
         proxy_pass              http://localhost:7002;
@@ -12,20 +16,11 @@ server {
         proxy_redirect          off;
     }
 
-    listen 443 ssl; # managed by Certbot
-ssl_certificate /etc/letsencrypt/live/www.dingxiang-inc.com/fullchain.pem; # managed by Certbot
-ssl_certificate_key /etc/letsencrypt/live/www.dingxiang-inc.com/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-
-
-    if ($scheme != "https") {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-}
-
-server {
-    listen 80;
-    server_name  dingxiang-inc.com;
-    rewrite ^(.*) https://www.dingxiang-inc.com$1 permanent;
+    ssl on;
+    ssl_certificate dingxiang-inc.net.crt;
+    ssl_certificate_key dingxiang-inc.net.key;
+    ssl_session_timeout 5m;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_prefer_server_ciphers on;
 }
