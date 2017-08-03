@@ -1,7 +1,7 @@
 const head = document.head || document.getElementsByTagName("head")[0]
 
 function loadScript(url, callback) {
-  const node = document.createElement("script")
+  let node = document.createElement("script")
 
   node.charset = 'utf-8'
   node.async = true
