@@ -1,5 +1,11 @@
 
 ## mysql
+ 
+innodb 引擎
+
+查询，join，排序时，数字的处理更快一点
+
+避免外键约束，但是对外键进行索引
 
 ```
 SHOW VARIABLES LIKE 'character%';

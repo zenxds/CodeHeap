@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    function downloadFile(fileName, content){
+      const a = document.createElement('a')
+      const blob = new Blob([content], {type : 'application/json'})
+      const url = URL.createObjectURL(blob)
+
+      a.download = fileName
+      a.href = URL.createObjectURL(blob)
+      a.click()
+      URL.revokeObjectURL(url)
+    }
+
+    downloadFile('a.txt', JSON.stringify({
+      name: 'test'
+    }, null, 2))
+  </script>
+</body>
+</html>

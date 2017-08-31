@@ -7,17 +7,18 @@
 <body>
   <canvas width="300" height="300" />
 
+  <script src="./Canvas2DContext.js"></script>
   <script>
     var canvas = document.getElementsByTagName('canvas')[0]
-    var ctx = canvas.getContext('2d')
-
-    ctx.lineWidth = 300
-    ctx.strokeStyle = '#f00'
-    ctx.beginPath()
-
-    ctx.moveTo(0, 0)
-    ctx.lineTo(0, 150)
-    ctx.stroke()
+    var context = new Canvas2DContext(canvas)
+    // var ctx = canvas.getContext('2d')
+    context
+    .lineWidth(300)
+    .strokeStyle('#f00')
+    .beginPath()
+    .moveTo(0, 0)
+    .lineTo(0, 150)
+    .stroke()
   </script>
 </body>
 </html>

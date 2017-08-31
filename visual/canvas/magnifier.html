@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>放大镜</title>
+  <style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    text-align: center;
+    background: #eee;
+  }
+
+  canvas {
+    margin: 20px auto;
+  }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <canvas id="off-canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    const scale = 2 // 放大比例
+    const radius = 100 // 放大镜大小
+
+    const img = new Image()
+    img.onload = function() {
+      canvas.width = this.width / scale
+      canvas.height = this.height / scale
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    }
+    img.src = "image.png"
+
+    let isMouseDown = false
+
+    canvas.addEventListener('mousedown', function(e) {
+      e.preventDefault()
+
+      const pos = windowPosToCanvas(e.pageX, e.pageY)
+      showMagnifier(pos)
+    }, false)
+
+    canvas.addEventListener('mousemove', function(e) {
+      e.preventDefault()
+
+      if (!isMouseDown) {
+        return
+      }
+
+      const pos = windowPosToCanvas(e.pageX, e.pageY)
+      showMagnifier(pos)
+    }, false)
+
+    canvas.addEventListener('mouseout', function(e) {
+      e.preventDefault()
+      hideMagnifier()
+    })
+
+    document.addEventListener('mousedown', function() {
+      isMouseDown = true
+    })
+    document.addEventListener('mouseup', function() {
+      isMouseDown = false
+      hideMagnifier()
+    })
+
+    function hideMagnifier() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    }
+
+    function showMagnifier(pos) {
+      // 鼠标要在canvas范围内      
+      if (pos.x < 0 || pos.y < 0) {
+        return
+      }
+
+      const x = pos.x * scale
+      const y = pos.y * scale
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height)      
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+      // clip必须save再restore
+      ctx.save()      
+
+      ctx.beginPath()
+      ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2)
+      ctx.lineWidth = 10
+      ctx.strokeStyle = '#999'
+      ctx.stroke()
+      ctx.clip()
+
+      ctx.drawImage(img, x - radius, y - radius, 2 * radius, 2 * radius, pos.x - radius, pos.y - radius, 2 * radius, 2 * radius)
+
+      ctx.restore()
+    }
+
+    function windowPosToCanvas(x, y) {
+      const rect = canvas.getBoundingClientRect()
+
+      return {
+        x: x - rect.left,
+        y: y - rect.top
+      }
+    } 
+  </script>
+</body>
+</html>
