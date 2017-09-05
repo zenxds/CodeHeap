@@ -69,7 +69,7 @@ const props = [
   'textBaseline'
 ]
 
-class Canvas2DContext {
+class Context {
   constructor(canvas) {
     if (typeof canvas === 'string') {
       canvas = document.getElementById(canvas)

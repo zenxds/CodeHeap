@@ -7,11 +7,12 @@
 <body>
   <canvas width="300" height="300" />
 
-  <script src="./Canvas2DContext.js"></script>
+  <script src="./util/Context.js"></script>
   <script>
     var canvas = document.getElementsByTagName('canvas')[0]
-    var context = new Canvas2DContext(canvas)
+    var context = new Context(canvas)
     // var ctx = canvas.getContext('2d')
+
     context
     .lineWidth(300)
     .strokeStyle('#f00')

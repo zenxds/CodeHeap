@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <button id="blur">模糊</button>
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    const image = new Image()
+
+    image.onload = function() {
+      canvas.width = this.width
+      canvas.height = this.height
+      ctx.drawImage(image, 0, 0, this.width, this.height)
+    }
+    image.src = '../../darth-vader.jpg'
+
+    /**
+     * 参考模糊半径的点取平均值
+     */
+    document.getElementById('blur').addEventListener('click', function() {
+      const originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      const originalPixelData = originalImageData.data
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      const pixelData = imageData.data
+
+      const blurRadius = 3
+      const avgNumber =  Math.pow(blurRadius * 2 + 1, 2)
+
+      for (let i = blurRadius; i < canvas.height - blurRadius; i++) {
+        for (let j = blurRadius; j < canvas.width - blurRadius; j++) {
+          let totalR = 0
+          let totalG = 0
+          let totalB = 0
+
+          for (let dx = -blurRadius; dx <= blurRadius; dx++) {
+            for (let dy = -blurRadius; dy <= blurRadius; dy++) {
+              const x = i + dx
+              const y = j + dy
+              const p = x * canvas.width + y
+              totalR += originalPixelData[p * 4]
+              totalG += originalPixelData[p * 4 + 1]
+              totalB += originalPixelData[p * 4 + 2]
+            }
+          }
+
+          const p = i * canvas.width + j
+          pixelData[p * 4] = totalR / avgNumber
+          pixelData[p * 4 + 1] = totalG / avgNumber
+          pixelData[p * 4 + 2] = totalB / avgNumber
+        }
+      }
+      ctx.putImageData(imageData, 0, 0)
+
+    }, false)
+  </script>
+</body>
+</html>
