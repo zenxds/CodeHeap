@@ -16,6 +16,10 @@ server {
         proxy_redirect          off;
     }
 
+    location ~* \.(eot|ttf|woff|woff2)$ {
+        add_header Access-Control-Allow-Origin *;
+    }
+
     ssl on;
     ssl_certificate dingxiang-inc.net.crt;
     ssl_certificate_key dingxiang-inc.net.key;
