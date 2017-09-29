@@ -33,7 +33,7 @@ server {
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9$
     location ~ \.php$ {
         #fastcgi_pass 127.0.0.1:9000;
-        # With php5-fpm:
+        # With php fpm:
         fastcgi_pass unix:/run/php/php7.0-fpm.sock;
         include snippets/fastcgi-php.conf;
     }

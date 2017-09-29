@@ -6,7 +6,7 @@
     su zenxds
 
     # 生成ssh key
-    ssh-keygen -t rsa -C "xx@gmail.com"
+    ssh-keygen -t rsa -b 4096 -C "xx@gmail.com"
 
     # 将本地机器的ssh key加入到vps的authorized_keys里面，并修改权限
     vim ~/.ssh/authorized_keys
@@ -23,9 +23,11 @@
 
     [安装最新版nodejs](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
 
-    sudo apt-get install git mysql-server nginx php5 php5-fpm php5-mysql
+    sudo apt-get install git mysql-server nginx php7.0 php7.0-fpm php7.0-mysql
 
     # 下载wordpress，配置并复制到/var/www目录下
+    wget http://cn.wordpress.org/wordpress-4.8.1-zh_CN.tar.gz
+    tar -xzvf wordpress-4.8.1-zh_CN.tar.gz 
     cp wp-config-sample.php wp-config.php
     vim ~/wordpress/wp-config.php
 

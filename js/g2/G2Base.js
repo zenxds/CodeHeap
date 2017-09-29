@@ -91,6 +91,6 @@ export default class G2Base extends React.Component {
   }
 
   render() {
-    return (<div  className="g-chart"><div ref={div => { this.container = div }} style={{height: this.props.height}}></div></div>)
+    return (<div className="g2-chart"><div ref={div => { this.container = div }} style={{height: this.props.height}}></div></div>)
   }
 }

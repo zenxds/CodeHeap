@@ -25,7 +25,7 @@ export function isHexColor(val) {
 }
 
 export function isImage(val) {
-  return /(.*)\.(jpg|jpeg|png|gif|ico|bmp|tif|raw|tga)$/.test(val)
+  return /(.*)\.(jpg|jpeg|png|gif|svg|webp|ico|bmp|tif|raw|tga)$/.test(val)
 }
 
 export function isIP(val) {
