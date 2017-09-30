@@ -14,3 +14,27 @@ const log = url => {
 }
 
 export default log
+
+/**
+ * http://tongji.baidu.com/open/api/more?p=guide_trackEvent
+ * 
+ * ['_trackEvent', category, action, opt_label, opt_value]
+ */
+export function trackEvent(...args) {
+  const _hmt = window._hmt
+  if (!_hmt) {
+    return
+  }
+
+  args = ['_trackEvent', 'a.com', ...args]
+  _hmt.push(args)
+}
+
+export function trackPageview(path) {
+  const _hmt = window._hmt
+  if (!_hmt) {
+    return
+  }
+
+  _hmt.push(['_trackPageview', `/a.com${path}`])
+}
