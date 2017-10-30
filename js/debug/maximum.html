@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    (function test() {
+      // 捕获异常，递归次数过多调试工具会抛出异常。
+      try {
+        (function a(i) {
+          // 当打开调试工具后，抛出异常，setTimeout执行test无参数，此时i == NaN，("" + i / i).length == 3
+          // debugger设置断点
+          (1 !== ("" + i / i).length || 0 === i) && (function (){}).constructor("debugger")(), a(++i);
+        })(0)
+      } catch (e) {
+        alert(e)
+        setTimeout(test, 500)
+      }
+    })()
+  </script>
+</body>
+
+</html>

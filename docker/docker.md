@@ -22,7 +22,7 @@ docker exec -it xx /bin/bash
 docker run -t -i --privileged zenxds/chrome /bin/bash
 
 // 备份
-docker run --rm --volumes-from mysql -v $(pwd)/backup:/backup debian cp -r /var/lib/mysql /backup/
+sudo docker run --rm --volumes-from 2d15f7f011fa -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /var/lib/mysql
 
 // mac上要先运行这条命令才能cd到/var/lib/docker里
 // https://stackoverflow.com/questions/38532483/where-is-var-lib-docker-on-mac-os-x

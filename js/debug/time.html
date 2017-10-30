@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+<body>
+  <script>
+    var hasDebugger = false
+    var start = new Date()
+
+    try {
+        // 新建一个匿名函数，这样debugger得不到任何信息
+        (function() {}).constructor('debugger')()
+        if (new Date() - start > 200) {
+          hasDebugger = true
+        }
+    } catch(e) {}
+
+    alert(hasDebugger)    
+  </script>
+</body>
+</html>
