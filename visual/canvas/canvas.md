@@ -43,6 +43,7 @@ ctx.shadowBlur
 ctx.shadowColor
 
 fillText(text, x, y [, maxWidth])
+measureText
 strokeText(text, x, y [, maxWidth])
 font = value
 textAlign = value

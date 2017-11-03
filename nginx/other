@@ -5,4 +5,8 @@ server {
     return 403;
     # deny all;
   }
+
+  location ~* \.(jpg|jpeg|gif|png|ico|svg|css|js|eot|ttf|woff|woff2)$ {
+    root /path/to/anothersite1;
+  }
 }

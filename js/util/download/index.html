@@ -17,6 +17,8 @@
       a.download = fileName
       a.href = URL.createObjectURL(blob)
       a.click()
+
+      // 释放blob
       URL.revokeObjectURL(url)
     }
 
