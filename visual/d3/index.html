@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>D3</title>
+</head>
+<body>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+  d3.select("body")
+    .selectAll("p")
+    .data([4, 8, 15, 16, 23, 42])
+    .enter().append("p")
+    .text(function(d) { return "I’m number " + d + "!"; })
+    .style("color", function() {
+      return "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+    })
+    .style("font-size", function(d) { return d + "px"; })
+
+  d3.select("body").append('svg')
+  </script>  
+</body>
+</html>
