@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>D3</title>
+  <style>
+  </style>
+</head>
+<body>
+
+<script src="d3.v4.min.js"></script>
+<script>
+  // force layout
+;(function() {
+
+  var width = window.innerWidth, height = window.innerHeight
+  var nodes = new Array(1000).fill(undefined).map(item => {
+    return {}
+  })
+  
+  var simulation = d3.forceSimulation(nodes)
+    .force('charge', d3.forceManyBody().strength(-5))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .on('tick', ticked)
+
+  var svg = d3.select('body')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+
+  function ticked() {
+    var u = svg
+      .selectAll('circle')
+      .data(nodes)
+  
+    u.enter()
+      .append('circle')
+      .attr('r', 5)
+      .merge(u)
+      .attr('fill', 'cadetblue')
+      .attr('cx', function(d) {
+        return d.x
+      })
+      .attr('cy', function(d) {
+        return d.y
+      })
+  
+    u.exit().remove()
+  }
+
+})()
+</script>
+</body>
+</html>
