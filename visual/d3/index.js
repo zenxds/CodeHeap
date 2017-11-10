@@ -105,3 +105,29 @@
     .attr('cy', function(d) { return d.y })
     .attr('r', 4)
 })()
+
+// drag
+;(function() {
+  var svg = d3.select('svg')
+
+  let dx = 0
+  let dy = 0
+
+  function onDragStart() {
+  }
+
+  function onDrag() {
+    dx += d3.event.dx
+    dy += d3.event.dy
+
+    d3.select(this).attr('transform', `translate(${dx}, ${dy})`)
+  }
+
+  function onDragEnd() {
+    dx = 0
+    dy = 0
+    d3.select(this).attr('transform', `translate(0, 0)`)
+  }
+    
+  svg.call(d3.drag().on('start', onDragStart).on('drag', onDrag).on('end', onDragEnd))
+})()
