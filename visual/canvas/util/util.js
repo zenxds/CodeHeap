@@ -18,10 +18,10 @@ function roundedRect(ctx, x, y, width, height, radius) {
   ctx.moveTo(x, y + radius)
   ctx.lineTo(x, y + height - radius)
   ctx.quadraticCurveTo(x, y + height, x + radius, y + height)
-  ctx.lineTo(x + width - radius, y+height)
+  ctx.lineTo(x + width - radius, y + height)
   ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius)
-  ctx.lineTo(x + width,y + radius)
-  ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+  ctx.lineTo(x + width, y + radius)
+  ctx.quadraticCurveTo(x + width, y, x + width - radius, y)
   ctx.lineTo(x + radius, y)
   ctx.quadraticCurveTo(x, y, x, y + radius)
   ctx.stroke()
@@ -48,7 +48,7 @@ function loadImageToBase64(url) {
   image.src = url
 
   return new Promise((resolve, reject) => {
-    image.onload = function() {
+    image.onload = function () {
       resolve(this)
     }
     image.onerror = reject
@@ -59,4 +59,31 @@ function loadImageToBase64(url) {
     ctx.drawImage(img, 0, 0)
     return canvas.toDataURL()
   })
-} 
+}
+
+/**
+ * 把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交
+ */
+function convertCanvasToBlob(canvas) {
+  const format = "image/jpeg"
+  const base64 = canvas.toDataURL(format)
+  const code = window.atob(base64.split(",")[1])
+  const aBuffer = new window.ArrayBuffer(code.length)
+  const uBuffer = new window.Uint8Array(aBuffer)
+
+  for (let i = 0; i < code.length; i++) {
+    uBuffer[i] = code.charCodeAt(i)
+  }
+
+  const Builder = window.WebKitBlobBuilder || window.MozBlobBuilder
+  if (Builder) {
+    const builder = new Builder()
+    builder.append(buffer)
+
+    return builder.getBlob(format)
+  } else {
+    return new window.Blob([buffer], {
+      type: format
+    })
+  }
+}
