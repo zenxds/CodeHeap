@@ -40,3 +40,20 @@ function mix(to, from) {
   }
   return to
 }
+
+/**
+ * 不修改array引用的条件下 对数组过滤
+ */
+function filterArray(arr) {
+  let index = 0
+  
+  while (index <= arr.length - 1) {
+    const item = arr[index]
+
+    if (item.value <= 0) {
+      arr.splice(index, 1)
+    } else {
+      index += 1
+    }
+  }
+}
