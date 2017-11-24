@@ -28,7 +28,7 @@ function toThousands(v) {
 
 function abbrNum(number, decPlaces) {
   // 2 decimal places => 100, 3 => 1000, etc
-  decPlaces = Math.pow(10, decPlaces || 0)
+  decPlaces = Math.pow(10, decPlaces || 1)
 
   // Enumerate number abbreviations
   const abbrev = ["k", "m", "b", "t"]
