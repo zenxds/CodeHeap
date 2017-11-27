@@ -28,6 +28,8 @@ sudo docker run --rm --volumes-from 2d15f7f011fa -v $(pwd):/backup ubuntu tar cv
 // https://stackoverflow.com/questions/38532483/where-is-var-lib-docker-on-mac-os-x
 screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
 
+docker volume rm $(docker volume ls -qf dangling=true)
+
 // 关掉已经停止的容器，并删除volume
 docker rm -v $(docker ps -aq -f status=exited)
 ```

@@ -63,6 +63,7 @@ function loadImageToBase64(url) {
 
 /**
  * 把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交
+ * /^\s*data:([\w/]+)(?:;base64)?,/.exec() -> match[1] = format
  */
 function convertCanvasToBlob(canvas) {
   const format = "image/jpeg"

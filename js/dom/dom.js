@@ -31,6 +31,11 @@ const toArray = (nodes) => {
   }
 }
 
+/**
+ * 事件是否发生在元素内
+ * @param {domEvent} event 
+ * @param {node className} className 
+ */
 export function isInsideElement(event, className) {
   let element = event.srcElement || event.target
 

@@ -1,28 +1,9 @@
-const supportWebp = new Promise((resolve, reject) => {
-	const img = new Image()
-	
-	img.onload = function() {
-		if(img.height > 0 && img.width > 0) {
-			resolve()
-		} else {
-			reject()
-		}
-	}
-
-	img.onerror = function() {
-		reject()
-	}
-
-	img.src = 'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAsAAAABBxAREYiI/gcAAABWUDggGAAAADABAJ0BKgEAAQABABwlpAADcAD+/gbQAA=='
-})
-
-var canvasElem = document.createElement('canvas');
+var canvasElem = document.createElement('canvas')
 
 var support = {
 	"plugins": !!navigator.plugins,
 	"mimeTypes": !!navigator.mimeTypes,
 	"styleSheets": !!document.styleSheets,
-
 
 	// IE特有，10及以下版本
 	"createEventObject": !!document.createEventObject,
@@ -57,7 +38,6 @@ var support = {
 	// IE11还不支持，edge才支持
 	"promise": typeof Promise !== "undefined"
 };
-
 
 
 var result = document.getElementById('result');

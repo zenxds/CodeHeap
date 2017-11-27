@@ -25,4 +25,6 @@ export default function getCurrentScript() {
       return interactiveScript
     }
   }
+
+  return null
 }

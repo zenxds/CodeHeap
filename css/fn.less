@@ -1,14 +1,18 @@
 // https://github.com/sofish/typo.css/blob/master/typo.css
 @base-font: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
 
-/* 单行文字溢出时出现省略号，需设定宽度 */
+/*
+ * 单行文字溢出时出现省略号，需设定宽度
+ */
 .fn-text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* 需要设定为block元素 */
+/*
+ * 需要设定为block元素 
+ */
 .fn-hide-text {
   display: block;
   overflow: hidden;
@@ -16,7 +20,9 @@
   white-space: nowrap;
 }
 
-/* 强制换行 IE67 need layout*/
+/*
+ * 强制换行 IE67 need layout
+ */
 .fn-wrap {
   word-wrap: break-word;
   word-break: break-all;
@@ -39,10 +45,6 @@
   background-repeat: no-repeat;
   background-image: url("@{url}.@{suffix}");
   background-image: image-set(url("@{url}.@{suffix}") 1x, url("@{url}@2.@{suffix}") 2x);
-}
-
-.lighter {
-  font-weight: 300;
 }
 
 .square(@size) {
