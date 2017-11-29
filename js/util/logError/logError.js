@@ -49,4 +49,18 @@
     
     // log('domain' + '?' + s)
   }
+
+  addHandler(window, 'error', function(e) {
+    alert([e.message, e.filename, e.lineno, e.colno].join('\n'))
+  })
+
+  function addHandler(element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false)
+    } else if (element.attachEvent) {
+      element.attachEvent("on" + type, handler)
+    } else {
+      element["on" + type] = handler
+    }
+  }
 })(window)
