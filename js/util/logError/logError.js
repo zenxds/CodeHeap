@@ -76,7 +76,7 @@
     } else if (element.attachEvent) {
       element.attachEvent("on" + type, handler)
     } else {
-      element["on" + type] = handler
+      // element["on" + type] = handler
     }
   }
 })(window)
