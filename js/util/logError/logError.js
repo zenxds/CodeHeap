@@ -50,8 +50,24 @@
     // log('domain' + '?' + s)
   }
 
-  addHandler(window, 'error', function(e) {
-    alert([e.message, e.filename, e.lineno, e.colno].join('\n'))
+  // crossorigin="anonymous"
+
+  addHandler(window, 'error', function(event) {
+    // attachEvent情况下第一个参数是string
+    if (typeof event !== 'object') {
+      event = window.event
+    }
+
+    if (!event) {
+      return
+    }
+  
+    let message = event.message || event.errorMessage || ''
+    let url = event.filename || event.errorUrl || ''
+    let line = event.lineno || event.errorLine || ''
+    let col = event.colno || event.errorCharacter || ''
+
+    alert([url, line, col, message].join('\n'))
   })
 
   function addHandler(element, type, handler) {
