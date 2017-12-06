@@ -47,7 +47,7 @@ export function stopPropagation(event) {
 }
 
 export function getPageX(event) {
-  var pageX = event.pageX
+  let pageX = event.pageX
 
   if (pageX === undefined) {
     pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft)
@@ -57,13 +57,39 @@ export function getPageX(event) {
 }
 
 export function getPageY(event) {
-  var pageY = event.pageY
+  let pageY = event.pageY
 
   if (pageY === undefined) {
     pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop)
   }
 
   return pageY
+}
+
+/**
+ * 相对于target的偏移
+ * e.pageX - target.offsetLeft
+ */
+export function getOffsetX(event) {
+  let offsetX = event.offsetX 
+
+  if (offsetX === undefined) {
+    event = getEvent(event)
+    offsetX = event.clientX - Math.ceil(getTarget(event).getBoundingClientRect().left)
+  }
+
+  return offsetX
+}
+
+export function getOffsetY(event) {
+  var offsetY = event.offsetY
+
+  if (offsetY === undefined) {
+    event = getEvent(event)
+    offsetY = event.clientY - Math.ceil(getTarget(event).getBoundingClientRect().top)
+  }
+
+  return offsetY
 }
 
 export function getRelatedTarget(event) {
