@@ -10,12 +10,8 @@ innodb 引擎
 ```
 SHOW VARIABLES LIKE 'character%';
 
-// 修改my.conf
-[mysqld]
-
-character_set_server=utf8
-
 ALTER DATABASE `kindle` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE task CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 ## sql

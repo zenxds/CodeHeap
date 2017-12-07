@@ -10,3 +10,18 @@ function getRating(rating) {
  */
 ('0' + n).substr(-2) // 2 位
 ('000' + n).substr(-4) // 4 位
+
+
+// 检测devtool是否打开
+(function() {
+  var checkStatus = 'off'
+  var element = document.createElement('console')
+
+  Object.defineProperty(element, 'id', {
+    get: function() {
+      checkStatus = 'on'
+    }
+  })
+  
+  console.log(element + '')
+})()
