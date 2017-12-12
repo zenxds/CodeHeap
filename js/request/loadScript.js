@@ -5,7 +5,8 @@ function loadScript(url, callback) {
 
   node.charset = 'utf-8'
   node.async = true
-  node.setAttribute('crossOrigin', 'anonymous')
+  node.setAttribute('crossorigin', 'anonymous')
+  // node.crossOrigin = 'anonymous'
 
   if ('onload' in node) {
     node.onload = onload
