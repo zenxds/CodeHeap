@@ -44,6 +44,7 @@ ENV TZ Asia/Shanghai
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+apt-get install -qqy --no-install-recommends
 ```
 
 ## docker-compose
@@ -51,6 +52,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ```
 volumes:
   - ~/.ssh:/root/.ssh
+  - ~/.gitconfig:/root/.gitconfig
 ```
 
 ## 阿里云镜像
