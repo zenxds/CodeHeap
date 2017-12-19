@@ -57,3 +57,5 @@ function filterArray(arr) {
     }
   }
 }
+
+const getArrayMax = arr => Math.max(...arr)
