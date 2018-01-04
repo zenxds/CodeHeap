@@ -7,7 +7,7 @@ exports.exec = (cmd, { timeout=10000 }) => {
 
     process = shell.exec(cmd, function(code, stdout, stderr) {
       if (code === 0) {
-        resolve()
+        resolve(stdout)
       } else {
         reject(stderr)
       }
