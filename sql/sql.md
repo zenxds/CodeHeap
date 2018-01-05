@@ -28,3 +28,7 @@ SELECT * FROM gm_channel WHERE created_at > '2016-07-31 00:00:00' GROUP BY owner
 ```
 SELECT owner_id, type, COUNT(*) FROM gm_channel WHERE created_at > '2016-07-31 00:00:00' GROUP BY owner_id, type;
 ```
+
+```
+SELECT user.id, user.email, user.createdAt, COUNT(record.userId) AS records FROM user, record WHERE user.id=record.userId AND user.email NOT LIKE '%dingxiang%' GROUP BY user.id;
+```

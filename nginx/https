@@ -7,6 +7,7 @@ server {
 server {
     listen       443;
     server_name  dingxiang-inc.net;
+    client_max_body_size 100M;
 
     location / {
         proxy_pass              http://localhost:7002;
