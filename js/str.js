@@ -115,3 +115,13 @@ const endsWith = (str, suffix) => {
   const index = str.length - suffix.length
   return index >= 0 && str.indexOf(suffix, index) === index
 }
+
+function getPlaceholderCount(str, kw) {
+  let count = 0
+
+  str.replace(new RegExp(kw, 'ig'), function(m, i) {
+    count++
+  })
+
+  return count
+}
