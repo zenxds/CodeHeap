@@ -3,6 +3,10 @@ const getter = function (val) {
   return Math.round(val * 100) / 100
 }
 
+function isFloat(n){
+  return Number(n) === n && n % 1 !== 0;
+}
+
 /**
  * @see http://heeroluo.net/article/detail/115
  * 从个位数起，每三位之间加一个逗号。例如"10,000"
