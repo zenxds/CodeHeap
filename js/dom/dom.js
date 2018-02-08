@@ -69,3 +69,15 @@ export function getParentUntil(element, className) {
 
   return null
 }
+
+function getTextWidth(text) {
+  const el = document.createElement('div')
+  el.style.cssText += ';position: absolute; left: -9999px; top: -9999px'
+  el.innerHTML = text
+
+  document.body.appendChild(el)
+  const width = el.offsetWidth
+  document.body.removeChild(el)
+
+  return width
+}

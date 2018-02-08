@@ -28,13 +28,6 @@ function to_ascii(str) {
   })
 }
 
-/**
- * 计算js字符串所占的字节数
- */
-function byteCount(s) {
-  return encodeURI(s).split(/%..|./).length - 1
-}
-
 // 字符串截断， 超出省略号
 function truncate(str, length, truncation) {
   length = length || 30
@@ -116,6 +109,9 @@ const endsWith = (str, suffix) => {
   return index >= 0 && str.indexOf(suffix, index) === index
 }
 
+/**
+ * 获取关键字在字符串中出现的次数
+ */
 function getPlaceholderCount(str, kw) {
   let count = 0
 
