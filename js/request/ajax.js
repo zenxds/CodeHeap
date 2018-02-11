@@ -14,16 +14,21 @@
 export default (options={}) => {
   options = extend({}, {
     method: 'GET',
-    data: {},
+    url: '',
     dataType: 'json',
+    data: {},
     headers: {},
+    timeout: 30 * 1000,
+    cache: true,
     async: true,
-    credentials: false,
-    timeout: 30 * 1000
+    credentials: false
   }, options)
 
   options.method = options.method.toUpperCase()
   if (options.method === 'GET') {
+    if (!options.cache) {
+      options.data._r = Math.random().toString().slice(2)
+    }
     options.url += (options.url.indexOf('?') > 0 ? '&' : '?') + param(options.data)
   }
 
@@ -37,16 +42,16 @@ export default (options={}) => {
       })
     }
     const onload = () => {
-      let text = xhr.responseText
+      let resp = xhr.responseText
 
       if (options.dataType.toLowerCase() === 'json') {
         try {
-          resolve(JSON.parse(text))
+          resolve(JSON.parse(resp))
         } catch(err) {
           onerror(err)
         }
       } else {
-        resolve(text)
+        resolve(resp)
       }
     }
     const ontimeout = () => {
@@ -63,6 +68,7 @@ export default (options={}) => {
     } else {
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
+          // IE会将204设置为1223 Opear会将204设置为0
           if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || xhr.status === 1223 || xhr.status === 0) {
             onload()
           } else {
