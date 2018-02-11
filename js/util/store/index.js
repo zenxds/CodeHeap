@@ -1,9 +1,11 @@
 import * as cookie from './cookie'
 import * as ls from './ls'
+import * as session from './session'
 
 const modules = {
   '1': cookie,
-  '2': ls
+  '2': ls,
+  '3': session
 }
 
 

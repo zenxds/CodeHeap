@@ -14,11 +14,11 @@ const post = (url, data) => new Promise((resolve, reject) => {
 
   const xhr = new XMLHttpRequest()
   const onload = () => {
-    const text = xhr.responseText || '{ "success": false, "msg": "Empty responseText"}'
-    resolve(JSON.parse(text))
-  }
-  const onerror = (e) => {
-    reject(e)
+    try {
+      resolve(JSON.parse(xhr.responseText))
+    } catch(err) {
+      reject(err)
+    }
   }
 
   xhr.open('POST', url, true)
@@ -26,7 +26,8 @@ const post = (url, data) => new Promise((resolve, reject) => {
   if (xhr.setRequestHeader) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
   }
+
   xhr.onload = onload
-  xhr.onerror = onerror
+  xhr.onerror = reject
   xhr.send(param(data))
 })
