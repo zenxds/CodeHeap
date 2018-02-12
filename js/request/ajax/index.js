@@ -1,5 +1,8 @@
+import param from './param'
+import isPlainObject from './isPlainObject.js'
+import Promise from './param'
+
 /**
- * 依赖Promise & param函数
  * @param {*} options 
  * method
  * url
@@ -19,15 +22,17 @@ export default (options={}) => {
     data: {},
     headers: {},
     timeout: 30 * 1000,
-    cache: true,
     async: true,
+    cache: false,    
     credentials: false
   }, options)
 
   options.method = options.method.toUpperCase()
-  if (options.method === 'GET') {
+  options.dataType = options.dataType.toLowerCase()
+
+  if (options.method === 'GET' && isPlainObject(options.data)) {
     if (!options.cache) {
-      options.data._r = Math.random().toString().slice(2)
+      options.data._ = Math.random().toString().slice(2)
     }
     options.url += (options.url.indexOf('?') > 0 ? '&' : '?') + param(options.data)
   }
@@ -42,16 +47,22 @@ export default (options={}) => {
       })
     }
     const onload = () => {
-      let resp = xhr.responseText
+      // IE会将204设置为1223
+      // Opear会将204设置为0，这里先不处理0
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || xhr.status === 1223) {
+        let resp = xhr.response || xhr.responseText
 
-      if (options.dataType.toLowerCase() === 'json') {
-        try {
-          resolve(JSON.parse(resp))
-        } catch(err) {
-          onerror(err)
+        if (options.dataType === 'json') {
+          try {
+            resolve(JSON.parse(resp))
+          } catch(err) {
+            onerror(err)
+          }
+        } else {
+          resolve(resp)
         }
       } else {
-        resolve(resp)
+        onerror(new TypeError('Request Error'))
       }
     }
     const ontimeout = () => {
@@ -68,23 +79,25 @@ export default (options={}) => {
     } else {
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-          // IE会将204设置为1223 Opear会将204设置为0
-          if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || xhr.status === 1223 || xhr.status === 0) {
-            onload()
-          } else {
-            onerror(new TypeError('Request Error'))
-          }
+          onload()
         }
       }
     }
 
+    // onerror
     xhr.onerror = () => {
       onerror(new TypeError('Network Error'))
     }
 
-    xhr.ontimeout = ontimeout
+    // timeout
+    // IE8设置timeout会抛出错误
+    try {
+      xhr.timeout = options.timeout    
+      xhr.ontimeout = ontimeout
+    } catch(err) {}
     setTimeout(ontimeout, options.timeout)
 
+    // open
     xhr.open(options.method, options.url, options.async)
     xhr.withCredentials = options.credentials
 
@@ -93,11 +106,16 @@ export default (options={}) => {
     }
     setRequestHeader('X-Requested-With', 'XMLHttpRequest')
 
-    if (options.method === 'GET') {
+    if (/^(HEAD|GET)$/.test(options.method)) {
       xhr.send(null)
     } else {
-      setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-      xhr.send(param(options.data))
+      let data = options.data
+      if (isPlainObject(data)) {
+        data = param(data)
+        setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')        
+      }
+
+      xhr.send(data)
     }
   })
 }
