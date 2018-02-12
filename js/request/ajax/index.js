@@ -1,6 +1,6 @@
 import param from './param'
 import isPlainObject from './isPlainObject.js'
-import Promise from './param'
+import Promise from './Promise'
 
 /**
  * @param {*} options 
