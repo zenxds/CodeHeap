@@ -54,26 +54,26 @@ if (document.readyState === "complete" ||
 } else if (document.addEventListener) {
 
   // Use the handy event callback
-  document.addEventListener("DOMContentLoaded", completed);
+  document.addEventListener("DOMContentLoaded", completed)
 
   // A fallback to window.onload, that will always work
-  window.addEventListener("load", completed);
+  window.addEventListener("load", completed)
 
   // If IE event model is used
 } else {
 
   // Ensure firing before onload, maybe late but safe also for iframes
-  document.attachEvent("onreadystatechange", completed);
+  document.attachEvent("onreadystatechange", completed)
 
   // A fallback to window.onload, that will always work
-  window.attachEvent("onload", completed);
+  window.attachEvent("onload", completed)
 
   // If IE and not a frame
   // continually check to see if the document is ready
-  var top = false;
+  var top = false
 
   try {
-    top = window.frameElement == null && document.documentElement;
+    top = window.frameElement == null && document.documentElement
   } catch (e) {}
 
   if (top && top.doScroll) {
@@ -84,18 +84,18 @@ if (document.readyState === "complete" ||
 
           // Use the trick by Diego Perini
           // http://javascript.nwbox.com/IEContentLoaded/
-          top.doScroll("left");
+          top.doScroll("left")
         } catch (e) {
-          return window.setTimeout(doScrollCheck, 50);
+          return window.setTimeout(doScrollCheck, 50)
         }
 
         // detach all dom ready events
-        detach();
+        detach()
 
         // and execute any waiting functions
-        ready();
+        ready()
       }
-    })();
+    })()
   }
 }
 

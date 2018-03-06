@@ -85,6 +85,6 @@
   // Test: Print the IP addresses into the console
   getIPs()
   .then(ips => {
-    console.log(ips)
+    alert(Object.keys(ips))
   })
 })()

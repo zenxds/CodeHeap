@@ -1,4 +1,5 @@
-import param from './param'
+import { param } from './param'
+// 不严谨一点也可以使用isObject
 import isPlainObject from './isPlainObject.js'
 import Promise from './Promise'
 
@@ -62,11 +63,11 @@ export default (options={}) => {
           resolve(resp)
         }
       } else {
-        onerror(new TypeError('Request Error'))
+        onerror(new Error('Request Error'))
       }
     }
     const ontimeout = () => {
-      onerror(new TypeError('Network Timeout'))
+      onerror(new Error('Network Timeout'))
     }
     const setRequestHeader = (k, v) => {
       if (xhr.setRequestHeader) {
@@ -86,7 +87,7 @@ export default (options={}) => {
 
     // onerror
     xhr.onerror = () => {
-      onerror(new TypeError('Network Error'))
+      onerror(new Error('Network Error'))
     }
 
     // timeout

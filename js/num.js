@@ -4,8 +4,10 @@ const getter = function (val) {
 }
 
 function isFloat(n){
-  return Number(n) === n && n % 1 !== 0;
+  return Number(n) === n && n % 1 !== 0
 }
+
+const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n) && Number(n) == n
 
 /**
  * @see http://heeroluo.net/article/detail/115
@@ -13,6 +15,8 @@ function isFloat(n){
  * @param v {Number}
  * @returns {string}
  */
+// const toDecimalMark = num => num.toLocaleString('en-US')
+
 function toThousands(v) {
   let num = (v || 0).toString()
   let result = ''

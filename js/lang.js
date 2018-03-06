@@ -34,9 +34,9 @@ const isLeapYear = (date) => {
   return new Date(date.getFullYear(), 2, 0).getDate() == 29
 }
 
-function mix(to, from) {
-  for (var i in from) {
-    to[i] = from[i]
+function mix(target, source) {
+  for (let prop in source) {
+    target[prop] = source[prop]
   }
   return to
 }

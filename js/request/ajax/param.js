@@ -11,7 +11,7 @@ const isValidParamValue = (val) => {
 
 const encode = encodeURIComponent
 
-const param = (o, sep, eq, serializeArray) => {
+export const param = (o, sep, eq, serializeArray) => {
   sep = sep || '&'
   eq = eq || '='
   if (serializeArray === undefined) {
@@ -53,5 +53,3 @@ const param = (o, sep, eq, serializeArray) => {
   buf.pop()
   return buf.join('')
 }
-
-export default param
