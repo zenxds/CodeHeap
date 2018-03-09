@@ -70,7 +70,7 @@ export default (options={}) => {
       onerror(new Error('Network Timeout'))
     }
     const setRequestHeader = (k, v) => {
-      if (xhr.setRequestHeader) {
+      if ('setRequestHeader' in xhr) {
         xhr.setRequestHeader(k, v)
       }
     }
@@ -86,21 +86,26 @@ export default (options={}) => {
     }
 
     // onerror
-    xhr.onerror = () => {
-      onerror(new Error('Network Error'))
+    if ('onerror' in xhr) {
+      xhr.onerror = () => {
+        onerror(new Error('Network Error'))
+      }
     }
 
     // timeout
     // IE8设置timeout会抛出错误
-    try {
-      xhr.timeout = options.timeout    
+    if ('ontimeout' in xhr) {
+      xhr.timeout = options.timeout
       xhr.ontimeout = ontimeout
-    } catch(err) {}
-    setTimeout(ontimeout, options.timeout)
+    } else {
+      setTimeout(ontimeout, options.timeout)
+    }
 
     // open
     xhr.open(options.method, options.url, options.async)
-    xhr.withCredentials = options.credentials
+    if ('withCredentials' in xhr) {
+      xhr.withCredentials = options.credentials
+    }
 
     for(let i in options.headers) {
       setRequestHeader(i, options.headers[i])
@@ -113,7 +118,7 @@ export default (options={}) => {
       let data = options.data
       if (isPlainObject(data)) {
         data = param(data)
-        setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')        
+        setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
       }
 
       xhr.send(data)

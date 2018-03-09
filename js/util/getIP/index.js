@@ -4,25 +4,13 @@
   var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection
 
   function getIPs() {
-    if (!RTCPeerConnection) {
-      return Promise.reject('No RTCPeerConnection')
+    if (!window.RTCPeerConnection || !window.RTCDataChannel) {
+      reject('No RTCPeerConnection or No RTCDataChannel')
+      return
     }
-
+  
     // construct a new RTCPeerConnection
-    var pc = new RTCPeerConnection({
-      iceServers: [
-        // {
-        //   urls: "stun:stun.services.mozilla.com"
-        // },
-        {
-          urls: "stun:stun.l.google.com:19302?transport=udp"
-        }
-      ]
-    }, {
-      optional: [{
-        RtpDataChannels: true
-      }]
-    })
+    var pc = new RTCPeerConnection()
 
     var ips = {}
     var ipReg = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
