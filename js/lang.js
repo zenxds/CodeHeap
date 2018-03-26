@@ -59,3 +59,8 @@ function filterArray(arr) {
 }
 
 const getArrayMax = arr => Math.max(...arr)
+
+/**
+ * 匹配带单双引号字符串里的内容
+ */
+const reg = /(['"])(.+?)\1/

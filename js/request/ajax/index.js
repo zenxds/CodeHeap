@@ -75,7 +75,7 @@ export default (options={}) => {
       }
     }
 
-    if ('onload' in xhr) {
+    if ('onload' in xhr && 'timeout' in xhr) {
       xhr.onload = onload
     } else {
       xhr.onreadystatechange = () => {
@@ -94,10 +94,10 @@ export default (options={}) => {
 
     // timeout
     // IE8设置timeout会抛出错误
-    if ('ontimeout' in xhr) {
+    try {
       xhr.timeout = options.timeout
       xhr.ontimeout = ontimeout
-    } else {
+    } catch(err) {
       setTimeout(ontimeout, options.timeout)
     }
 

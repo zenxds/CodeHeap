@@ -1,9 +1,24 @@
 var canvasElem = document.createElement('canvas')
 
+const supportSetXHRHeader = () => {
+	let xhr = new XMLHttpRequest()
+	let testStr = 'test_header'
+
+	try {
+		xhr.open('GET', '/aaa')
+		xhr.setRequestHeader('param', 'test_header')
+		return true
+	} catch(err) {
+		return false
+	}
+}
+
 var support = {
 	"plugins": !!navigator.plugins,
 	"mimeTypes": !!navigator.mimeTypes,
 	"styleSheets": !!document.styleSheets,
+
+	XHRHeader: supportSetXHRHeader(),
 
 	// IE特有，10及以下版本
 	"createEventObject": !!document.createEventObject,
