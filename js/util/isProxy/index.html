@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>isProxy</title>
+</head>
+<body>
+  <script>
+    // 通过DNS查询时间判断是否使用了代理，代理状态下DNS交给代理去做，时间为0
+    isProxy().then(result => {
+      console.log(result)
+    })
+
+    function isProxy() {
+      if (!window.performance || typeof performance.getEntriesByName !== 'function') {
+        return Promise.reject('no performance')
+      }
+
+      return new Promise((resolve, reject) => {
+        let rnd = (Math.random() * 9e6) | 0
+        let url = 'https://' + rnd.toString(36) + '.w.ns6.top/'
+
+        let img = new Image()
+        img.onerror = function() {
+          let entry = performance.getEntriesByName(url)[0]
+          resolve(entry.domainLookupEnd - entry.domainLookupStart === 0)
+        }
+        img.src = url
+      })
+    }
+  </script>
+</body>
+</html>
