@@ -10,7 +10,7 @@ docker pull node:8 // 下载镜像
 docker build . -t xx/xx(.是构建上下文，被ADD 或 COPY 指令所引用)
 
 // 启动容器
-docker run --rm --it --name myname -v /data -d 镜像名 /bin/bash
+docker run --rm -it --name myname -v /data -d 镜像名 /bin/bash
 
 docker-compose up
 docker-compose build
