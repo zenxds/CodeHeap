@@ -6,6 +6,7 @@ import {
 } from '.'
 
 import Validator from './Validator'
+import { resolve } from 'url';
 
 test('isEmail', t => {
   t.truthy(isEmail('aaa@123.com'))
@@ -23,17 +24,40 @@ test('isInteger', t => {
   t.falsy(isInteger(123.45))
 })
 
-test('Validator', t => {
-  const validator = new Validator()
-
-  validator.add('', [
-    {
+test.cb('Validator', t => {
+  const validator = new Validator({
+    userName: {
       required: true,
-      msg: '用户名不能为空'
+      message: '用户名不能为空'
     }
-  ])
+  })
 
-  let errMsg = validator.validate()
+  validator.validate({
+    userName: ''
+  }).catch((errMsg) => {
+    t.is(errMsg, '用户名不能为空')
+    t.end()
+  })
+})
 
-  t.is(errMsg, '用户名不能为空')
+test.cb('Async Validator', t => {
+  const validator = new Validator({
+    test: {
+      async: true,
+      message: '异步错误'
+    }
+  })
+
+  validator.addStrategy('async', (value, errorMsg) => new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(errorMsg)
+    }, 1000)
+  }))
+
+  validator.validate({
+    test: 'test'
+  }).catch((errMsg) => {
+    t.is(errMsg, '异步错误')
+    t.end()
+  })
 })

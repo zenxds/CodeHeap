@@ -5,7 +5,7 @@
 /**
  * 验证策略
  */
-const strategies = {
+const builtInStrategies = {
   required: function(value, errorMsg) {
     if (value === "") {
       return errorMsg
@@ -26,51 +26,91 @@ const strategies = {
 }
 
 /**
- * const validator = new Validator()
+ * const validator = new Validator({
+ *   userName: [
+ *     {
+ *       required: true,
+ *       message: '用户名不能为空'
+ *     }
+ *   ]
+ * })
  * 
- * validator.add('user1', [
- *  {
- *    required: true,
- *    msg: '用户名不能为空'
- *  }
- * ])
+ * validator.validate({
+ *   userName: 'user1'
+ * })
  */
 class Validator {
-  constructor() {
-    this._rules = []
+  constructor(descriptor={}) {
+    this.initRules(descriptor)
+    this.initStrategies()
   }
 
-  add(value, rules) {
-    each(rules, rule => {
-      each(strategies, (fn, strategy) => {
-        if (rule.hasOwnProperty(strategy)) {
-          let args = [value, rule.msg]
-          let s = rule[strategy]
-          if (typeof s === 'string') {
-            args = args.concat(s.split(':'))
-          } else {
-            args.push(s)
+  initStrategies() {
+    this._strategies = {}
+
+    each(builtInStrategies, (strategy, name) => {
+      this._strategies[name] = strategy
+    })
+  }
+
+  addStrategy(name, strategy) {
+    this._strategies[name] = strategy
+  }
+
+  initRules(descriptor) {
+    this._rules = {}
+
+    each(descriptor, (rules, name) => {
+      this._rules[name] = isArray(rules) ? rules : [rules]
+    })
+  }
+
+  validate(values={}) {
+    let strategies = this._strategies
+    let asyncRules = []
+    let errorMsg = ''
+
+    each(values, (value, name) => {
+      const rules = this._rules[name]
+
+      each(rules, rule => {
+        each(strategies, (fn, strategy) => {
+          if (!rule.hasOwnProperty(strategy)) {
+            return
           }
 
-          this._rules.push(() => fn(...args))
-        }
+          let args = rule[strategy]
+          if (!isArray(args)) {
+            args = [args]
+          }
+          args = [value, rule.message].concat(args)
+
+          let ret = fn(...args)
+  
+          if (isThenable(ret)) {
+            asyncRules.push(ret)
+            return
+          }
+
+          if (ret) {
+            errorMsg = ret
+            return false
+          }
+        })
+
+        return !errorMsg
       })
-    })
-  }
 
-  validate() {
-    let ret = ''
-
-    each(this._rules, fn => {
-      let msg = fn()
-
-      if (msg) {
-        ret = msg
-        return false
-      }
+      return !errorMsg
     })
 
-    return ret
+    if (errorMsg) {
+      return Promise.reject(errorMsg)
+    } else if (asyncRules.length) {
+      return Promise.race(asyncRules)
+    }
+
+    return Promise.resolve()
   }
 }
 
@@ -91,5 +131,17 @@ function each(object, fn) {
         break
       }
     }
+  }
+}
+
+function isThenable(obj) {
+  return obj && isFunction(obj.then)
+}
+
+const isFunction = isType('Function')
+const isArray = Array.isArray || isType('Array')
+function isType(type) {
+  return function(obj) {
+    return {}.toString.call(obj) == "[object " + type + "]"
   }
 }

@@ -1,8 +1,8 @@
 var a = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-        resolve(3000);
-    }, 3000);
-});
+  setTimeout(function() {
+    resolve(3000)
+  }, 3000)
+})
 
 /**
  * promise2 = promise1.then(onFulfilled, onRejected)
@@ -24,18 +24,16 @@ var a = new Promise(function(resolve, reject) {
 // 正确的用法应该是这样的
 
 function fun1() {
-     return new Promise(function(resolve, reject) {
-        setTimeout(function(){
-            resolve();
-        },1000)
-    })
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve()
+    }, 1000)
+  })
 }
 
 // 如果不喜欢，还可以使用defer风格
 // var defer = Promise.defer()
 //
-
-
 
 // Promise.all()会以一个 promises 数组为输入，并且返回一个新的 promise。这个新的 promise 会在数组中所有的 promises 都成功返回后才返回。他是异步版的 for 循环。
 
@@ -47,44 +45,44 @@ function fun1() {
 // a().then(function() { retunr promiseA; }).then(function() { retunr promiseB; }).catch()
 
 var getData = function() {
-    var deferred = $.Deferred();
+  var deferred = $.Deferred()
 
-    $.getJSON(api, function(data){
-        deferred.resolve(data[0]);
-    });
+  $.getJSON(api, function(data) {
+    deferred.resolve(data[0])
+  })
 
-    return deferred.promise();
+  return deferred.promise()
 }
 
 var getImg = function(src) {
-    var deferred = $.Deferred();
+  var deferred = $.Deferred()
 
-    var img = new Image();
+  var img = new Image()
 
-    img.onload = function() {
-        deferred.resolve(img);
-    };
+  img.onload = function() {
+    deferred.resolve(img)
+  }
 
-    img.src = src;
+  img.src = src
 
-    return deferred.promise();
+  return deferred.promise()
 }
 
 var showImg = function(img) {
-    $(img).appendTo($('#container'));
+  $(img).appendTo($("#container"))
 }
 
 getData()
-.then(getImg)
-.then(showImg);
+  .then(getImg)
+  .then(showImg)
 
 var defer = function() {
-    var deferred = {};
+  var deferred = {}
 
-    deferred.promise = new Promise(function(resolve, reject) {
-        deferred.resolve = resolve;
-        deferred.reject = reject;
-    });
+  deferred.promise = new Promise(function(resolve, reject) {
+    deferred.resolve = resolve
+    deferred.reject = reject
+  })
 
-    return deferred;
-};
+  return deferred
+}
