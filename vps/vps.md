@@ -1,49 +1,68 @@
+```
+adduser zenxds
+passwd zenxds
+# 加到sudo组
+usermod -a -G sudo/root zenxds
+// or
+visudo
 
-    adduser zenxds
-    # 加到sudo组
-    usermod -a -G sudo zenxds
-    ＃ 切到新加的用户
-    su zenxds
+＃ 切到新加的用户
+su zenxds
 
-    # 生成ssh key
-    ssh-keygen -t rsa -b 4096 -C "xx@gmail.com"
+git
+zsh
+oh-my-zsh
+curl
+wget
+pip
+docker
+pip install docker-compose
+npm install -g fkill pm2 yarn
+```
 
-    # 将本地机器的ssh key加入到vps的authorized_keys里面，并修改权限
-    vim ~/.ssh/authorized_keys
-    sudo chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh/
+```
+# 生成ssh key
+ssh-keygen -t rsa -b 4096 -C "xx@gmail.com"
 
-    # 编辑sshd_config
-    vim /etc/ssh/sshd_config
-    去掉 AuthorizedKeysFile .ssh/authorized_keys的注释
-    # 禁止root登陆
-    PermitRootLogin no
+# 将本地机器的ssh key加入到vps的authorized_keys里面，并修改权限
+vim ~/.ssh/authorized_keys
+sudo chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh/
 
-    # 重启ssh服务
-    sudo service ssh restart
+# 编辑sshd_config
+vim /etc/ssh/sshd_config
+去掉 AuthorizedKeysFile .ssh/authorized_keys的注释
+# 禁止root登陆
+PermitRootLogin no
 
-    [安装最新版nodejs](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
+# 重启ssh服务
+sudo service ssh restart
+```
 
-    sudo apt-get install git mysql-server nginx php7.0 php7.0-fpm php7.0-mysql
+```
+[安装最新版nodejs](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
 
-    # 下载wordpress，配置并复制到/var/www目录下
-    wget http://cn.wordpress.org/wordpress-4.8.1-zh_CN.tar.gz
-    tar -xzvf wordpress-4.8.1-zh_CN.tar.gz 
-    cp wp-config-sample.php wp-config.php
-    vim ~/wordpress/wp-config.php
+sudo apt-get install git mysql-server nginx php7.0 php7.0-fpm php7.0-mysql
 
-    sudo mkdir -p /var/www
-    sudo cp -r ~/wordpress/* /var/www
-    # 设置相关权限
-    cd /var/www/
-    sudo chown www-data:www-data * -R
-    sudo usermod -a -G www-data {username}
+# 下载wordpress，配置并复制到/var/www目录下
+wget http://cn.wordpress.org/wordpress-4.8.1-zh_CN.tar.gz
+tar -xzvf wordpress-4.8.1-zh_CN.tar.gz 
+cp wp-config-sample.php wp-config.php
+vim ~/wordpress/wp-config.php
 
-    # 配置nginx
-    sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress
+sudo mkdir -p /var/www
+sudo cp -r ~/wordpress/* /var/www
+# 设置相关权限
+cd /var/www/
+sudo chown www-data:www-data * -R
+sudo usermod -a -G www-data {username}
 
-    # 删除apache2
-    sudo apt-get purge apache2*
+# 配置nginx
+sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress
 
-    # 更新apt
-    apt-get update
-    apt-get upgrade
+# 删除apache2
+sudo apt-get purge apache2*
+
+# 更新apt
+apt-get update
+apt-get upgrade
+```
