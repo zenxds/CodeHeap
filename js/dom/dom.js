@@ -81,3 +81,43 @@ function getTextWidth(text) {
 
   return width
 }
+
+{
+  // 场景：滚动条滚动到页面内容块时对应的导航高亮
+  const $elems = $('.elem')
+  const $navs = $('.nav')
+  const viewportHeight = $window.height()
+
+  for (let i = 0; i < $elems.length; i++) {
+    let rect = $elems[i].get(0).getBoundingClientRect()
+    let center = Math.ceil(viewportHeight / 2)
+
+    // 视口的中间线在元素的范围内
+    if (center > rect.top && center < rect.bottom) {
+      $navs.removeClass('active').eq(i).addClass('active')
+      break
+    }
+  }
+}
+
+{
+  // https://codepen.io/eksch/pen/xwdOeK
+  $(window).scroll(function () {
+    const scrollDistance = $(window).scrollTop()
+
+    // Show/hide menu on scroll
+    //if (scrollDistance >= 850) {
+    //		$('nav').fadeIn("fast");
+    //} else {
+    //		$('nav').fadeOut("fast");
+    //}
+
+    // Assign active class to nav links while scolling
+    $('.page-section').each(function (i) {
+      if ($(this).position().top <= scrollDistance) {
+        $('.navigation a.active').removeClass('active')
+        $('.navigation a').eq(i).addClass('active')
+      }
+    })
+  }).scroll()
+}
