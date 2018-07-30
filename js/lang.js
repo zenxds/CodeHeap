@@ -33,23 +33,6 @@ function pick(arr) {
   return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr
 }
 
-function randomColor() {
-  let ret = '#'
-
-  for (let i = 0; i < 3; i++) {
-    ret += toHex(random(0, 255))
-  }
-
-  return ret.toUpperCase()
-}
-
-function toHex(num) {
-  const ret = num.toString(16)
-  return ret.length === 1 ? ('0' + ret) : ret
-}
-
-
-
 /**
  * 是否是闰年
  * @param {*} date 

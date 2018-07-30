@@ -6,7 +6,6 @@ import {
 } from '.'
 
 import Validator from './Validator'
-import { resolve } from 'url';
 
 test('isEmail', t => {
   t.truthy(isEmail('aaa@123.com'))

@@ -70,6 +70,21 @@ function doc(fn) {
     .trim()
 }
 
+function randomColor() {
+  let ret = '#'
+
+  for (let i = 0; i < 3; i++) {
+    ret += toHex(random(0, 255))
+  }
+
+  return ret.toUpperCase()
+}
+
+function toHex(num) {
+  const ret = num.toString(16)
+  return ret.length === 1 ? ('0' + ret) : ret
+}
+
 function hexToRgba(color, opacity) {
   color = color.replace('#', '')
 
@@ -77,9 +92,9 @@ function hexToRgba(color, opacity) {
     color = color.charAt(0) + color.charAt(0) + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2)
   }
 
-  const r = parseInt(color.slice(0, 2), 16)
-  const g = parseInt(color.slice(2, 4), 16)
-  const b = parseInt(color.slice(4, 6), 16)
+  const r = parseInt(color.substr(0, 2), 16)
+  const g = parseInt(color.substr(2, 2), 16)
+  const b = parseInt(color.substr(4, 2), 16)
   return `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
 
