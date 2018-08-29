@@ -1,6 +1,6 @@
-// 保留两位小数
-const getter = function (val) {
-  return Math.round(val * 100) / 100
+// 保留n位小数
+const toFixed = function(num, decimals=1){
+  return (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals)
 }
 
 function isFloat(n){
@@ -12,26 +12,30 @@ const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n) && Number(n) == n
 /**
  * @see http://heeroluo.net/article/detail/115
  * 从个位数起，每三位之间加一个逗号。例如"10,000"
+ * 支持负数和小数
  * @param v {Number}
  * @returns {string}
  */
 // const toDecimalMark = num => num.toLocaleString('en-US')
-
-function toThousands(v) {
-  let num = (v || 0).toString()
+function toThousands(v, spliter=',') {
+  let arr = Math.abs(v).toString().split('.')
+  let num = arr[0]
   let result = ''
+
   while (num.length > 3) {
-    result = ',' + num.slice(-3) + result
+    result = spliter + num.slice(-3) + result
     num = num.slice(0, num.length - 3)
   }
   if (num) {
     result = num + result
   }
-  return result
+
+  return (v < 0 ? '-' : '') + result + (arr[1] ? '.' + arr[1] : '')
 }
 
 /**
- * int to kmb
+ * int to kmbt
+ * 与formatBytes函数的不同是abbrNum函数会四舍五入
  */
 
 function abbrNum(number, decPlaces) {
@@ -71,13 +75,19 @@ function abbrNum(number, decPlaces) {
 }
 
 // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
-export function formatBytes(bytes, decimals=2) {
-  if (bytes == 0) {
-    return '0B'
+// 在原答案的基础上处理了toFixed的精度问题
+export function abbrNum(num, decimals=2) {
+  // ['', "k", "m", "b", "t"]
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  if (num == 0) {
+    return '0' + sizes[0]
   }
 
+  const toFixed = function(num, decimals){
+    return (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals)
+  }
   const k = 1000
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(decimals)) + '' + sizes[i]
+  const i = Math.floor(Math.log(num) / Math.log(k))
+  const ret = parseFloat(toFixed(num / Math.pow(k, i), decimals))
+  return ret === 1000 ? 1 + sizes[i + 1] : ret + sizes[i]
 }

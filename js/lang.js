@@ -41,11 +41,15 @@ const isLeapYear = (date) => {
   return new Date(date.getFullYear(), 2, 0).getDate() == 29
 }
 
+const isExtendsFrom = (Child, Parent) => {
+  return isFunction(Child) && Child.prototype instanceof Parent
+}
+
 function mix(target, source) {
   for (let prop in source) {
     target[prop] = source[prop]
   }
-  return to
+  return target
 }
 
 /**

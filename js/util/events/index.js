@@ -42,6 +42,10 @@ class Events {
   }
 
   one(events, callback) {
+    if (!callback) {
+      return this
+    }
+
     let cb = (...args) => {
       this.off(events, cb)
       callback(...args)

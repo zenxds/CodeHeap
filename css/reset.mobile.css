@@ -7,11 +7,17 @@ body {
   height: 100%;
   user-select: none;
 }
+
 html {
   font-size: 62.5%;
 }
-html,button,input,select,textarea {
-  font-family: "Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif
+
+html,
+button,
+input,
+select,
+textarea {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif
 }
 
 body {
@@ -23,31 +29,41 @@ body {
   color: #333;
   background-color: #fff;
 }
+
 a {
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
+
 img {
   max-width: 100%;
   vertical-align: middle;
 }
-a, img {
-    -webkit-touch-callout: none;
+
+a,
+img {
+  -webkit-touch-callout: none;
 }
-h1, h2, h3 {
+
+h1,
+h2,
+h3 {
   font-weight: normal;
 }
 
-input::-moz-placeholder,textarea::-moz-placeholder {
-    color: #ccc;
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #ccc;
 }
 
-input:-ms-input-placeholder,textarea:-ms-input-placeholder {
-    color: #ccc;
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #ccc;
 }
 
-input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
-    color: #ccc;
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #ccc;
 }
 
 .flex-box {
@@ -55,6 +71,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
   display: -webkit-flex;
   display: flex;
 }
+
 .flex-item {
   -webkit-box-flex: 1;
   -webkit-flex: 1;

@@ -16,15 +16,12 @@ const hasOwnProperty = function (o, p) {
 const isEqual = function (a, b) {
 
   const ret = a === b
-  let aType
-  let bType
-
   if (ret || (a == null || b == null)) {
     return ret
   }
 
-  aType = type(a)
-  bType = type(b)
+  let aType = type(a)
+  let bType = type(b)
   /**
    * type不同即不相等
    */
@@ -53,25 +50,29 @@ const isEqual = function (a, b) {
 
 const compareObject = function (a, b) {
   let p
+
+  if (isArray(a) && isArray(b) && a.length !== b.length) {
+    return false
+  }
   
   for (p in b) {
     if (!hasOwnProperty(a, p) && hasOwnProperty(b, p)) {
       return false
     }
   }
+
   for (p in a) {
     if (!hasOwnProperty(b, p) && hasOwnProperty(a, p)) {
       return false
     }
   }
+
   for (p in b) {
     if (!isEqual(a[p], b[p])) {
       return false
     }
   }
-  if (isArray(a) && isArray(b) && a.length !== b.length) {
-    return false
-  }
+
   return true
 }
 

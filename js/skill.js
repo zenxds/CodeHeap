@@ -5,6 +5,9 @@ function getRating(rating) {
   return '★★★★★☆☆☆☆☆'.substring(5 - rating, 10 - rating)
 }
 
+// 计算试用期结束时间
+// moment('2018-09-01').add(6, 'month').subtract(1, 'day').format('YYYY-MM-DD')
+
 /**
  * 数字补0
  */
