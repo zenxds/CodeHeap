@@ -1,6 +1,6 @@
 function isArraylike(obj) {
-  var length = obj.length,
-    type = jQuery.type(obj)
+  const length = obj.length
+  const type = jQuery.type(obj)
 
   if (type === "function" || jQuery.isWindow(obj)) {
     return false
@@ -15,14 +15,14 @@ function isArraylike(obj) {
 }
 
 function sortBy(target, fn, scope) {
-  var array = target.map(function (item, index) {
+  const array = target.map(function(item, index) {
     return {
       el: item,
       re: fn.call(scope, item, index)
     }
   }).sort(function (left, right) {
-    var a = left.re
-    var b = right.re
+    const a = left.re
+    const b = right.re
 
     return a < b ? -1 : a > b ? 1 : 0
   })
@@ -30,4 +30,15 @@ function sortBy(target, fn, scope) {
   return array.map(function (item) {
     return item.el
   })
+}
+
+/**
+ * sort dom array
+ */
+function sort(items, fn) {
+  items = sortBy(items, fn)
+
+  for (let i = 0; i < items.length; i++) {
+    items[i].parentNode.appendChild(items[i])
+  }
 }

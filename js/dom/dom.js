@@ -20,8 +20,9 @@ const scrollX = window.pageXOffset || (document.documentElement && document.docu
 
 // nodeList to array
 const toArray = (nodes) => {
-  const ret = []
-  const slice = [].slice
+  let ret = []
+  let slice = [].slice
+
   try {
     ret = slice.call(nodes, 0)
   } catch (e) {
@@ -70,23 +71,11 @@ export function getParentUntil(element, className) {
   return null
 }
 
-function getTextWidth(text) {
-  const el = document.createElement('div')
-  el.style.cssText += ';position: absolute; left: -9999px; top: -9999px'
-  el.innerHTML = text
-
-  document.body.appendChild(el)
-  const width = el.offsetWidth
-  document.body.removeChild(el)
-
-  return width
-}
-
 {
   // 场景：滚动条滚动到页面内容块时对应的导航高亮
   const $elems = $('.elem')
   const $navs = $('.nav')
-  const viewportHeight = $window.height()
+  const viewportHeight = $(window).height()
 
   for (let i = 0; i < $elems.length; i++) {
     let rect = $elems[i].get(0).getBoundingClientRect()

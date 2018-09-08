@@ -17,13 +17,18 @@ function byteLength(str, fix=2) {
 // from uglify
 function to_ascii(str) {
   return str.replace(/[\u0080-\uffff]/g, function (ch) {
-    const code = ch.charCodeAt(0).toString(16)
+    let code = ch.charCodeAt(0).toString(16)
+
     if (code.length <= 2) {
-      while (code.length < 2) code = "0" + code;
-      return "\\x" + code;
+      while (code.length < 2) {
+        code = "0" + code
+      }
+      return "\\x" + code
     } else {
-      while (code.length < 4) code = "0" + code;
-      return "\\u" + code;
+      while (code.length < 4) {
+        code = "0" + code
+      }
+      return "\\u" + code
     }
   })
 }
@@ -68,6 +73,10 @@ function doc(fn) {
     .replace(/^[^\/]+\/\*!?/, '')
     .replace(/\*\/[^\/]+$/, '')
     .trim()
+}
+
+function randomColor2() {
+  return '#' + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, '0')
 }
 
 function randomColor() {

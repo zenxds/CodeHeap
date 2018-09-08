@@ -76,7 +76,7 @@ function abbrNum(number, decPlaces) {
 
 // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
 // 在原答案的基础上处理了toFixed的精度问题
-export function abbrNum(num, decimals=2) {
+export function abbrNum2(num, decimals=2) {
   // ['', "k", "m", "b", "t"]
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
   if (num == 0) {

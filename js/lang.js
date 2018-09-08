@@ -5,12 +5,12 @@
  */
 const deepCopy = (src, target) => {
   if (!src || typeof src !== "object") {
-    return src;
+    return src
   }
 
   target = target || src.constructor === Array ? [] : {}
 
-  for (var i in src) {
+  for (let i in src) {
     if (src.hasOwnProperty(i)) {
       target[i] = typeof src[i] === "object" ? deepCopy(src[i]) : src[i]
     }

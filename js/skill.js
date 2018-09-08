@@ -16,7 +16,7 @@ function getRating(rating) {
 
 
 // 检测devtool是否打开
-(function() {
+;(function() {
   var checkStatus = 'off'
   var element = document.createElement('console')
 
