@@ -29,3 +29,20 @@ function getTextWidth(text) {
 
   return width
 }
+
+function swapElements(node1, node2) {
+  const parent = node2.parentNode
+  const next = node2.nextSibling
+
+  if (next === node1) {
+    parent.insertBefore(node1, node2)
+  } else {
+    node1.parentNode.insertBefore(node2, node1)
+
+    if (next) {
+      parent.insertBefore(node1, next)
+    } else {
+      parent.appendChild(node1)
+    }
+  }
+}

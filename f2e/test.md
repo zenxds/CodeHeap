@@ -1,14 +1,13 @@
 ## 静态检查
 
-* jslint
-* jshint
 * eslint
 
 ## 单元测试
 
-* qunit
 * jsmine
 * mocha
+* ava
+* jest
 
 ## 断言
 

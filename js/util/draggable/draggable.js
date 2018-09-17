@@ -1,47 +1,50 @@
-(function($) {
+(function ($) {
 
-    var draggable = function(selector) {
-        var $elements = $(selector);
+  const $document = $(document)
 
-        // 鼠标的初始位置
-        var mouseX = 0,
-            mouseY = 0;
-        // 元素的x,y
-        var divLeft,
-            divTop;
+  const draggable = function(selector) {
+    const $elements = $(selector)
 
-        $elements.mousedown(function(event) {
-            var offset = $(this).offset();
-            divLeft = parseInt(offset.left, 10);
-            divTop = parseInt(offset.top, 10);
+    let $dragger
+    // 鼠标的初始位置
+    let mouseX
+    let mouseY
+    // 元素的x,y
+    let draggerX
+    let draggerY
 
-            mouseX = event.pageX;
-            mouseY = event.pageY;
+    $elements.on('mousedown.draggable', function(event) {
+      $dragger = $(this)
 
-            $(this).bind('mousemove', dragElement);
-            $(this).trigger("drag.start");
-        });
+      mouseX = event.pageX
+      mouseY = event.pageY
 
-        function dragElement(event) {
-            var left = divLeft + (event.pageX - mouseX);
-            var top  = divTop + (event.pageY - mouseY);
+      const offset = $dragger.offset()
+      draggerX = parseInt(offset.left, 10)
+      draggerY = parseInt(offset.top, 10)
 
-            $(this).css({
-                'top': top + 'px',
-                'left': left + 'px',
-                'position': 'absolute'
-            });
-            return false;
-        }
+      $document.on('mousemove.draggable', dragElement)
+    })
 
-        $(document).mouseup(function() {
-            $elements.unbind('mousemove');
-            $elements.trigger("drag.end");
-        });
-    };
+    function dragElement(event) {
+      let left = draggerX + (event.pageX - mouseX)
+      let top = draggerY + (event.pageY - mouseY)
 
+      $dragger.css({
+        'position': 'absolute',
+        'left': left + 'px',
+        'top': top + 'px'
+      })
+      return false
+    }
 
-    $(function() {
-        draggable("[data-draggable]");
-    });
-})(jQuery);
+    $document.on('mouseup.draggable', function () {
+      $document.off('mousemove.draggable')
+    })
+  }
+
+  $(function () {
+    draggable("[data-draggable]")
+  })
+
+})(jQuery)
