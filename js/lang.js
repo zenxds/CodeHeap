@@ -19,30 +19,10 @@ const deepCopy = (src, target) => {
 }
 
 /**
- * 随机min-max之间的一个整数
- * 包含min和max
- */
-function random(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1))
-}
-
-/**
  * 从数组中随机选择一个元素
  */
 function pick(arr) {
   return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr
-}
-
-/**
- * 是否是闰年
- * @param {*} date 
- */
-const isLeapYear = (date) => {
-  return new Date(date.getFullYear(), 2, 0).getDate() == 29
-}
-
-const isExtendsFrom = (Child, Parent) => {
-  return isFunction(Child) && Child.prototype instanceof Parent
 }
 
 function mix(target, source) {

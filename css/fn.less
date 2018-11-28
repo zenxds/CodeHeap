@@ -40,26 +40,26 @@
   display: block;
 }
 
-.image-set(@url) {
+.fn-image-set(@url) {
   @url2: replace(@url, "\.(jpe?g|png)$", "@2x.$1");
   background-repeat: no-repeat;
   background-image: url(@url);
   background-image: image-set(url(@url) 1x, url(@url2) 2x);
 }
 
-.square(@size) {
+.fn-square(@size) {
   width: @size;
   height: @size;
 }
 
-.center() {
+.fn-center() {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-.flex-center() {
+.fn-flex-center() {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,10 +68,10 @@
 /*
  * 主要用在通过颜色变量改变opacity的时候
  */
-.color-opacity(@c, @v) {
+.fn-color-opacity(@c, @v) {
   color: rgba(red(@c), green(@c), blue(@c), @v);
 }
 
-.bg-opacity(@c, @v) {
+.fn-bg-opacity(@c, @v) {
   background-color: rgba(red(@c), green(@c), blue(@c), @v);
 }

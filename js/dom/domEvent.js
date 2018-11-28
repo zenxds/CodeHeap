@@ -71,7 +71,7 @@ export function getPageY(event) {
  * e.pageX - target.offsetLeft
  */
 export function getOffsetX(event) {
-  let offsetX = event.offsetX 
+  let offsetX = event.offsetX
 
   if (offsetX === undefined) {
     event = getEvent(event)
@@ -82,7 +82,7 @@ export function getOffsetX(event) {
 }
 
 export function getOffsetY(event) {
-  var offsetY = event.offsetY
+  let offsetY = event.offsetY
 
   if (offsetY === undefined) {
     event = getEvent(event)

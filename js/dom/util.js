@@ -9,7 +9,7 @@ function getScrollbarWidth() {
   document.body.appendChild(outer)
   const widthNoScroll = outer.offsetWidth
 
-  outer.style.overflow = "scroll"  
+  outer.style.overflow = "scroll"
   outer.appendChild(inner)
   const widthWithScroll = inner.offsetWidth
 
@@ -28,21 +28,4 @@ function getTextWidth(text) {
   document.body.removeChild(el)
 
   return width
-}
-
-function swapElements(node1, node2) {
-  const parent = node2.parentNode
-  const next = node2.nextSibling
-
-  if (next === node1) {
-    parent.insertBefore(node1, node2)
-  } else {
-    node1.parentNode.insertBefore(node2, node1)
-
-    if (next) {
-      parent.insertBefore(node1, next)
-    } else {
-      parent.appendChild(node1)
-    }
-  }
 }

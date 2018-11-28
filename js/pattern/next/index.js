@@ -24,7 +24,7 @@ function getCurrentScript2() {
   for (let i = scripts.length - 1; i >= 0; i--) {
     let script = scripts[i]
     if (script.readyState === "interactive") {
-      return interactiveScript
+      return script
     }
   }
 

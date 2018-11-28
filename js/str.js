@@ -33,15 +33,6 @@ function to_ascii(str) {
   })
 }
 
-// 字符串截断， 超出省略号
-function truncate(str, length, truncation) {
-  length = length || 30
-  truncation = truncation || "..."
-
-  return str.length > length ?
-    str.slice(0, length - truncation.length) + truncation : str
-}
-
 // 去除字符串中的html标签
 function stripTags(str) {
   return (str + '').replace(/<[^>]+>/g, '')
@@ -58,40 +49,14 @@ function stripScripts(str) {
   return (str + "").replace(/<script[^>]*>([\S\s]*?)<\/script>/img, "")
 }
 
-
-// 把字符串转为安全的正则源码
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-}
-
 function doc(fn) {
   // 1. 移除起始的 function(){ /*!
   // 2. 移除末尾的 */ }
   // 3. 移除起始和末尾的空格
   return fn.toString()
-    .replace(/^[^\/]+\/\*!?/, '')
-    .replace(/\*\/[^\/]+$/, '')
+    .replace(/^[^/]+\/\*!?/, '')
+    .replace(/\*\/[^/]+$/, '')
     .trim()
-}
-
-function randomColor2() {
-  return '#' + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, '0')
-}
-
-function randomColor() {
-  let ret = '#'
-
-  for (let i = 0; i < 3; i++) {
-    ret += toHex(random(0, 255))
-  }
-
-  return ret.toUpperCase()
-}
-
-function toHex(num) {
-  const ret = num.toString(16)
-  return ret.length === 1 ? ('0' + ret) : ret
 }
 
 function hexToRgba(color, opacity) {
@@ -105,15 +70,6 @@ function hexToRgba(color, opacity) {
   const g = parseInt(color.substr(2, 2), 16)
   const b = parseInt(color.substr(4, 2), 16)
   return `rgba(${r}, ${g}, ${b}, ${opacity})`
-}
-
-function randomStr(length) {
-  let str = ''
-
-  while (str.length < length) {
-    str += Math.random().toString(36).slice(2)
-  }
-  return str.substr(0, length)
 }
 
 /**
@@ -131,17 +87,4 @@ const startsWith = (str, prefix) => {
 const endsWith = (str, suffix) => {
   const index = str.length - suffix.length
   return index >= 0 && str.indexOf(suffix, index) === index
-}
-
-/**
- * 获取关键字在字符串中出现的次数
- */
-function getPlaceholderCount(str, kw) {
-  let count = 0
-
-  str.replace(new RegExp(kw, 'ig'), function(m, i) {
-    count++
-  })
-
-  return count
 }

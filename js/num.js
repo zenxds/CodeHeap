@@ -1,38 +1,3 @@
-// 保留n位小数
-const toFixed = function(num, decimals=1){
-  return (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals)
-}
-
-function isFloat(n){
-  return Number(n) === n && n % 1 !== 0
-}
-
-const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n) && Number(n) == n
-
-/**
- * @see http://heeroluo.net/article/detail/115
- * 从个位数起，每三位之间加一个逗号。例如"10,000"
- * 支持负数和小数
- * @param v {Number}
- * @returns {string}
- */
-// const toDecimalMark = num => num.toLocaleString('en-US')
-function toThousands(v, spliter=',') {
-  let arr = Math.abs(v).toString().split('.')
-  let num = arr[0]
-  let result = ''
-
-  while (num.length > 3) {
-    result = spliter + num.slice(-3) + result
-    num = num.slice(0, num.length - 3)
-  }
-  if (num) {
-    result = num + result
-  }
-
-  return (v < 0 ? '-' : '') + result + (arr[1] ? '.' + arr[1] : '')
-}
-
 /**
  * int to kmbt
  * 与formatBytes函数的不同是abbrNum函数会四舍五入

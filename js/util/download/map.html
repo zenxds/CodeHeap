@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>download</title>
+  <script src="https://webapi.amap.com/maps?v=1.4.1&key=0d78256ea89beeb8c25d1cd047549d1f"></script>
+  <script src="https://webapi.amap.com/ui/1.0/main.js"></script>
+</head>
+<body>
+  
+  <script>
+    function downloadFile(fileName, content){
+      const a = document.createElement('a')
+      const blob = new Blob([content], {type : 'application/json'})
+      const url = window.URL.createObjectURL(blob)
+
+      a.download = fileName
+      a.href = url
+      a.click()
+
+      // 释放blob
+      URL.revokeObjectURL(url)
+    }
+
+    const map = new AMap.Map('china', {
+      zoom: 4
+    })
+
+    AMapUI.load(['ui/geo/DistrictExplorer'], function(DistrictExplorer) {
+      const districtExplorer = new DistrictExplorer({
+        eventSupport: true, //打开事件支持
+        map: map
+      })
+
+      // 100000 = 全国
+      districtExplorer.loadAreaNode(100000, function(error, areaNode) {
+        if (error) {
+          return
+        }
+        
+        downloadFile('boundary.json', JSON.stringify({
+          "type":"FeatureCollection",
+          "features": [
+            areaNode.getParentFeature()
+          ]
+        }))
+        downloadFile('china.json', JSON.stringify({
+          "type":"FeatureCollection",
+          "features": areaNode.getSubFeatures()
+        }))
+      })
+    })
+  </script>
+</body>
+</html>
