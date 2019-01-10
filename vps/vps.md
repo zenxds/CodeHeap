@@ -1,3 +1,16 @@
+## 磁盘分配
+
+```
+/和swap是必须的，其余是推荐的
+
+/
+/boot         操作系统的内核和在启动系统过程中所要用到的文件
+/swap         交换空间，大约内存大小
+/var/log      日志
+/home         用户主目录
+/usr          用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录
+```
+
 ```
 adduser zenxds
 passwd zenxds

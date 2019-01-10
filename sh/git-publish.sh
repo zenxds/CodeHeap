@@ -1,15 +1,40 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-VER=$1
+set -e
 
-if [ -z "${VER}" ]
+BRANCH=$(git symbolic-ref --short HEAD)
+if [[ "${BRANCH}" =~ ^daily\/([0-9]+\.[0-9]+\.[0-9]+) ]]
 then
-    echo "USAGE:"
-    echo "./publish.sh VERSION  # VERSION looks like: 1.2.3"
+  echo "current branch ${BRANCH}"
+  VER=${BASH_REMATCH[1]}
+else
+  echo "current branch must be daily"
+  exit 1
 fi
 
-git checkout -b daily/${VER} master
-git push origin daily/${VER}
+STATUS=$(git status -s --untracked-files=no)
+if [ -n "${STATUS}" ]
+then
+  echo "changes to be committed"
+  echo ${STATUS}
+  exit 1
+fi
+
+PUBLISH="publish/${VER}"
+
+TAG=$(git ls-remote --tags origin | grep ${PUBLISH} || true)
+if [ -n "$TAG" ]
+then
+  echo "remote publish tag exists"
+  exit 1
+fi
+
 git checkout master
-git tag publish/${VER}
-git push origin publish/${VER}
+git reset --hard
+git merge ${BRANCH}
+git tag ${PUBLISH}
+git push origin master
+git push origin ${PUBLISH}
+git push origin --delete ${BRANCH}
+
+echo 'done.'

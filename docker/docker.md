@@ -1,4 +1,8 @@
 
+## 注意
+
+只映射需要的目录，不要整个大目录映射
+
 ## install 
 
 brew cask install docker
@@ -12,26 +16,23 @@ docker build . -t xx/xx(.是构建上下文，被ADD 或 COPY 指令所引用)
 // 启动容器
 docker run --rm -it --name myname -v /data -d 镜像名 /bin/bash
 
-docker-compose up
-docker-compose build
-
-docker inspect
+docker ps -s
+docker inspect xx
 docker exec -it xx /bin/bash
 
-                 --cap-add=SYS_ADMIN
-docker run -t -i --privileged zenxds/chrome /bin/bash
-
 // 备份
-sudo docker run --rm --volumes-from 2d15f7f011fa -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /var/lib/mysql
+sudo docker run --rm --volumes-from 85f8c8e73427 -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /var/data/cnpm_data
 
-// mac上要先运行这条命令才能cd到/var/lib/docker里
-// https://stackoverflow.com/questions/38532483/where-is-var-lib-docker-on-mac-os-x
-screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+docker system prune
 
-docker volume rm $(docker volume ls -qf dangling=true)
+# 删除退出的容器(同时删除和容器关联的volumes): 
+docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v
 
-// 关掉已经停止的容器，并删除volume
-docker rm -v $(docker ps -aq -f status=exited)
+# 删除未使用的镜像: 
+docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs -r docker rmi
+
+# 删除没用的volume
+docker volume rm `docker volume ls -f dangling=true |grep -v DRIVER|awk '{print $2}'`
 ```
 
 ## Dockerfile
@@ -50,6 +51,10 @@ apt-get install -qqy --no-install-recommends
 ## docker-compose
 
 ```
+docker-compose up
+docker-compose build
+docker-compose up -d --build
+
 volumes:
   - ~/.ssh:/root/.ssh
   - ~/.gitconfig:/root/.gitconfig

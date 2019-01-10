@@ -16,10 +16,10 @@ set autoindent    " auto indent
 set smarttab
 
 " tab size 
-set tabstop=4 
+set tabstop=4
 
-" default indent size 
-set shiftwidth=4 
+" default indent size
+set shiftwidth=4
 
 " how many lines of history VIM has to remember
 set history=500
@@ -38,18 +38,18 @@ set ignorecase
 set smartcase
 
 " intime search
-set incsearch 
+set incsearch
 
 " highlight search
-set hlsearch 
+set hlsearch
 
 
 """""""""""""""""""""""""""""""""""""""
 " Appearance
 """""""""""""""""""""""""""""""""""""""
 
-" highlight syntax 
-syntax on 
+" highlight syntax
+syntax on
 
 " color theme
 " colorscheme desert
@@ -62,7 +62,7 @@ colorscheme molokai
 set number
 
 " show current position on the right corner
-set ruler 
+set ruler
 
 " show mod and current cmd on the left corner
 set showmode
@@ -72,5 +72,5 @@ set showcmd
 set cursorline
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 

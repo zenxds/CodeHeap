@@ -46,7 +46,7 @@ function stripTags(str) {
 
 // 去除字符串中的script
 function stripScripts(str) {
-  return (str + "").replace(/<script[^>]*>([\S\s]*?)<\/script>/img, "")
+  return (str + "").replace(/<script[^>]*?>([\S\s]*?)<\/script>/img, "")
 }
 
 function doc(fn) {

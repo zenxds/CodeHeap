@@ -79,11 +79,11 @@ function convertCanvasToBlob(canvas) {
   const Builder = window.WebKitBlobBuilder || window.MozBlobBuilder
   if (Builder) {
     const builder = new Builder()
-    builder.append(buffer)
+    builder.append(uBuffer)
 
     return builder.getBlob(format)
   } else {
-    return new window.Blob([buffer], {
+    return new window.Blob([uBuffer], {
       type: format
     })
   }
