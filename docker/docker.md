@@ -1,11 +1,10 @@
-
 ## 注意
 
 只映射需要的目录，不要整个大目录映射
 
-## install 
+## mac install 
 
-brew cask install docker
+`brew cask install docker`
 
 ## cmd
 

@@ -1,6 +1,13 @@
 server {
   listen 80;
 
+  location = /p.png {
+    default_type image/png;
+    add_header Timing-Allow-Origin *;
+    access_log off;
+    return 200;
+  }
+
   location ~* \.deny\.js {
     return 403;
     # deny all;
@@ -26,5 +33,16 @@ server {
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
     proxy_http_version 1.1;
+  }
+
+  location / {
+    add_header Access-Control-Allow-Origin $http_origin;
+    add_header Access-Control-Allow-Credentials 'true';
+    add_header Access-Control-Allow-Methods 'GET,POST,OPTIONS';
+    add_header Access-Control-Allow-Headers 'Cookie,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+
+    if ($request_method = 'OPTIONS') {
+      return 204;
+    }
   }
 }

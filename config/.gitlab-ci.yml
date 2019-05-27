@@ -1,0 +1,152 @@
+before_script:
+    - node --version
+    - npm --version
+    - export TAR_VERSION=`node -p 'require("./package.json").version'`
+    - echo $TAR_VERSION
+    - echo $PATH
+    - whoami
+    - uname -a
+    - pwd
+
+.basic-requirements:
+    image: docker.io/node:latest
+    tags:
+        - qx-fe
+
+stages:
+    - deps
+    - test
+    - coverage
+    - audit
+    - build-daily
+    - build-demo
+    - build-production
+    - upload
+
+npm-install:
+    stage: deps
+    extends: .basic-requirements
+    script:
+        - npm install --registry https://registry.dingxiang-inc.net/
+    artifacts:
+        expire_in: 1h
+        when: on_success
+        paths:
+            - node_modules
+
+test:
+    stage: test
+    extends: .basic-requirements
+    dependencies:
+        - npm-install
+    except:
+        - master
+    retry: 2
+    script:
+        - npm run test
+
+run-coverage:
+    stage: coverage
+    extends: .basic-requirements
+    dependencies:
+        - npm-install
+    retry: 2
+    script:
+        - npm run coverage
+        - mv coverage/ public/
+    except:
+        - master
+    artifacts:
+        paths:
+            - public
+        expire_in: 30 days
+
+audit:
+    stage: audit
+    extends: .basic-requirements
+    dependencies:
+        - npm-install
+    except:
+        - master
+    script:
+        - npm audit
+
+build:daily:
+    stage: build-daily
+    extends: .basic-requirements
+    dependencies:
+        - npm-install
+    only:
+        - master
+    environment:
+        name: daily
+        url: http://daily.dingxiang-inc.com/bigdata/web-console-ui/
+    script:
+        - npm run build:daily
+        - tar czvf web-console-ui-daily-${TAR_VERSION}-`date +"%Y%m%d%H%M"`.tar.gz build-daily
+        - ls -alih
+    artifacts:
+        expire_in: 1h
+        when: on_success
+        paths:
+            - ./*.tar.gz
+            - ./build-daily
+
+build:demo:
+    stage: build-demo
+    extends: .basic-requirements
+    dependencies:
+        - npm-install
+    only:
+        - master
+    environment:
+        name: demo
+        url: http://demo.dingxiang-inc.com/bigdata/web-console-ui/
+    script:
+        - npm run build:demo
+        - tar czvf web-console-ui-demo-${TAR_VERSION}-`date +"%Y%m%d%H%M"`.tar.gz build-demo
+        - ls -alih
+    artifacts:
+        expire_in: 1h
+        when: on_success
+        paths:
+            - ./*.tar.gz
+            - ./build-demo
+            - ./build
+            - ./tmp
+
+build:production:
+    stage: build-production
+    extends: .basic-requirements
+    dependencies:
+        - npm-install
+        - build:daily
+        - build:demo
+    only:
+        - master
+    environment:
+        name: production
+        url: http://qx.dingxiang-inc.com
+    script:
+        - npm run build
+        - tar czvf web-console-ui-release-${TAR_VERSION}-`date +"%Y%m%d%H%M"`.tar.gz build
+        - ls -alih
+    artifacts:
+        expire_in: 30 days
+        when: on_success
+        paths:
+            - ./*.tar.gz
+
+ftp_upload:
+    stage: upload
+    extends: .basic-requirements
+    dependencies:
+        - build:daily
+        - build:demo
+        - build:production
+    only:
+        - master
+    retry: 2
+    script:
+        - ls -alih
+        - ./scripts/ftp_upload.sh
