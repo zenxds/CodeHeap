@@ -15,7 +15,7 @@
 adduser zenxds
 passwd zenxds
 # 加到sudo组
-usermod -a -G sudo或root zenxds
+usermod -a -G sudo zenxds或root zenxds
 // or
 visudo
 

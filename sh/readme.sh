@@ -13,5 +13,13 @@ echo `ls`
 ps ax | grep http-server | grep 18860 | awk '{print $1}' | xargs kill
 
 # 查看磁盘使用
-du -sh /var/lib/* | sort -nr
+du -sh $(pwd)/* | sort -nr
 du -h --max-depth=1
+
+# 删除的时候exclude
+ls . | egrep -v vmax | xargs rm -rf
+
+# 解压
+tar zxvf a.tar.gz
+# 压缩
+tar zcvf a.tar.gz DirName

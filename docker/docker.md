@@ -66,3 +66,9 @@ https://mqnyhl01.mirror.aliyuncs.com
 ```
 
 登陆控制台，会为每个用户生成一个镜像地址
+
+## node目录
+
+```
+/usr/src/app
+```

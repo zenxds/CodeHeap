@@ -1,3 +1,8 @@
+events {
+  worker_connections  1024;
+  use epoll;
+}
+
 server {
   listen 80;
 
@@ -21,6 +26,7 @@ server {
 
   location ~* \.(jpg|jpeg|gif|png|ico|svg|css|js|eot|ttf|woff|woff2)$ {
     root /path/to/anothersite1;
+    add_header Access-Control-Allow-Origin $http_origin;
 
     if (-f $request_filename) {
       expires 1h;

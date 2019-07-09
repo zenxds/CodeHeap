@@ -20,6 +20,9 @@ export function isInteger(val) {
   return /^-?[1-9]\d*$/.test(val)
 }
 
+// 只能输入数字
+// (v + '').replace(/[^1-9]/g, '')
+
 export function isHexColor(val) {
   return /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i.test(val)
 }
