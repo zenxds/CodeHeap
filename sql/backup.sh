@@ -1,22 +1,22 @@
 #!/bin/bash
 source /etc/profile
-cd /home/admin/docker-compose/mysql-backup
+
+backupDir=/home/ubuntu/mysql-backup
+containerName=ctuportal_mysql_1
+databaseName=portal
+
+# must use " to use variables
+# --ignore-table=official.log
+docker exec ${containerName} sh -c "mysqldump ${databaseName} -uroot -pmysql_root > /${databaseName}.sql && exit"
+docker cp ${containerName}:/${databaseName}.sql ${backupDir}
+docker exec ${containerName} sh -c "rm -f /${databaseName}.sql && exit"
 
 t=$(date +%Y-%m-%d_%H_%M_%S)
+sqlName=${databaseName}_${t}.sql
+tarName=${databaseName}_${t}.tar
 
-ctuSqlName=${t}_ctu.sql
-officialSqlName=${t}_official.sql
-tarName=${t}.tar
-
-# mysql为容器名
-docker exec mysql sh -c 'mysqldump ctu -uctu -pcTu123456 > /ctu.sql && mysqldump official -uofficial -p\$Dx.123i --ignore-table=official.log --ignore-table=official.report_top_detail> /official.sql && exit'
-docker cp mysql:/ctu.sql /home/admin/docker-compose/mysql-backup
-docker cp mysql:/official.sql /home/admin/docker-compose/mysql-backup
-docker exec mysql sh -c 'rm -rf /ctu.sql /official.sql && exit'
-
-
-mv ctu.sql ${ctuSqlName}
-mv official.sql ${officialSqlName}
-tar -zcvf ${tarName} ${ctuSqlName} ${officialSqlName}
-scp ${tarName} admin@10.154.147.29:/mydata/mysqldatabak
-rm -rf ${ctuSqlName} ${officialSqlName} ${tarName}
+cd ${backupDir}
+mv ${databaseName}.sql ${sqlName}
+tar -zcvf ${tarName} ${sqlName}
+scp ${tarName} ubuntu@10.105.23.199:/dxdata/mysql-backup/portal
+rm -rf ${sqlName} ${tarName}
