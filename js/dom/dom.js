@@ -16,7 +16,14 @@ const head = document.head || document.getElementsByTagName('head')[0] || docume
 const body = document.body
 
 const pageHeight = document.body.scrollHeight
-const scrollX = window.pageXOffset || (document.documentElement && document.documentElement.scrollLeft) || document.body.scrollLeft
+
+function getScrollX() {
+  return window.pageXOffset || (document.documentElement && document.documentElement.scrollLeft) || document.body.scrollLeft
+}
+
+function getScrollY() {
+  return window.pageYOffset || (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop
+}
 
 // nodeList to array
 const toArray = (nodes) => {

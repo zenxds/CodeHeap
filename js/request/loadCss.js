@@ -3,7 +3,7 @@ const ua = navigator.userAgent
 const isOldWebKit = +ua.replace(/.*(?:AppleWebKit|AndroidWebKit)\/?(\d+).*/i, "$1") < 536
 
 function loadCss(url, callback) {
-  const node = document.createElement('link')
+  let node = document.createElement('link')
 
   node.charset = 'utf-8'
   node.rel = 'stylesheet'

@@ -33,22 +33,6 @@ function to_ascii(str) {
   })
 }
 
-// 去除字符串中的html标签
-function stripTags(str) {
-  return (str + '').replace(/<[^>]+>/g, '')
-}
-
-// 另一种实现
-// var html = "<p>Some HTML</p>";
-// var div = document.createElement("div");
-// div.innerHTML = html;
-// var text = div.textContent || div.innerText || "";
-
-// 去除字符串中的script
-function stripScripts(str) {
-  return (str + "").replace(/<script[^>]*?>([\S\s]*?)<\/script>/img, "")
-}
-
 function doc(fn) {
   // 1. 移除起始的 function(){ /*!
   // 2. 移除末尾的 */ }
