@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/geo/DistrictExplorer/examples/index.html -->
+    <base href="//webapi.amap.com/ui/1.0/ui/geo/DistrictExplorer/examples/" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, user-scalable=no, width=device-width"
+    />
+    <title>行政区浏览</title>
+    <link rel="stylesheet" type="text/css" href="./area.css" />
+  </head>
+
+  <body>
+    <div id="outer-box">
+      <div id="container" tabindex="0"></div>
+      <div id="panel" class="scrollbar1">
+        <ul id="area-tree"></ul>
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="//webapi.amap.com/maps?v=1.4.15&key=您申请的key值"
+    ></script>
+    <!-- UI组件库 1.0 -->
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+    <script type="text/javascript">
+      //创建地图
+      var map = new AMap.Map("container", {
+        zoom: 4
+      })
+
+      AMapUI.load(["ui/geo/DistrictExplorer", "lib/$"], function(
+        DistrictExplorer,
+        $
+      ) {
+        //创建一个实例
+        var districtExplorer = (window.districtExplorer = new DistrictExplorer({
+          eventSupport: true, //打开事件支持
+          map: map
+        }))
+
+        districtExplorer.loadAreaNode(100000, function(error, areaNode) {
+          if (error) {
+            return
+          }
+
+          // console.log(areaNode)
+
+          downloadFile('boundary.json', JSON.stringify({
+            "type": "FeatureCollection",
+            "features": [
+              areaNode.getParentFeature()
+            ]
+          }))
+
+          downloadFile('china.json', JSON.stringify({
+            "type": "FeatureCollection",
+            "features": areaNode.getSubFeatures()
+          }))
+        })
+
+        // highcharts
+        // $.getJSON('https://data.jianshukeji.com/jsonp?filename=geochina/china.json&callback=?', function(mapdata) {
+        //   downloadFile('china.json', JSON.stringify({
+        //     "type": "FeatureCollection",
+        //     "features": mapdata.features
+        //   }))
+        // })
+
+        // datav
+        // https://datav.aliyun.com/tools/atlas
+        // https://geo.datav.aliyun.com/areas/bound/100000.json
+        // https://geo.datav.aliyun.com/areas/bound/100000_full.json
+      })
+
+      function downloadFile(fileName, content){
+        var a = document.createElement('a')
+        var blob = new Blob([content], {type : 'application/json'})
+        var url = window.URL.createObjectURL(blob)
+
+        a.download = fileName
+        a.href = url
+        a.click()
+
+        // 释放blob
+        URL.revokeObjectURL(url)
+      }
+    </script>
+  </body>
+</html>
