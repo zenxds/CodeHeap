@@ -1,3 +1,6 @@
+# $schema$$server_addr$request_uri
+# $host$request_uri
+
 server {
     listen 80;
     server_name  dingxiang-inc.net;

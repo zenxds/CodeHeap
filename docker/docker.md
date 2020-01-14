@@ -2,9 +2,9 @@
 
 只映射需要的目录，不要整个大目录映射
 
-## mac install 
+## install 
 
-`brew cask install docker`
+`curl -fsSL https://get.docker.com -o get-docker.sh`
 
 ## cmd
 

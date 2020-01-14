@@ -23,6 +23,10 @@ export function isInteger(val) {
 // 只能输入数字
 // (v + '').replace(/[^1-9]/g, '')
 
+// 匹配 a="a-b-c"
+// /(\w+?)=(['"])((?!\2).*?)\2/g
+// /(\w+?)=(['"])([\w\W]*?)\2/g
+
 export function isHexColor(val) {
   return /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i.test(val)
 }

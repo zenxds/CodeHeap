@@ -19,6 +19,9 @@ du -h --max-depth=1
 # 加上空行
 sh -c "cat build/index-private.js; echo; cat build/main.js; echo; cat build/init.js" > build/ua.js
 
+# 可以在打开Mac的共享-远程登录
+scp -r dashboard/* ubuntu@dingxiang-inc.com:/home/ubuntu/repository/ctu-portal/app/markets/console/dashboard
+
 # 删除的时候exclude
 ls . | egrep -v vmax | xargs rm -rf
 
@@ -38,3 +41,9 @@ free -m
 
 # 搜索文件
 find 目录 -iname *php*
+
+# 盘符挂载
+mount /dev/vdb1 /dxdata
+
+## 重启自动挂载
+echo /dev/vdb1 /dxdata ext3 defaults 0 0 >> /etc/fstab
