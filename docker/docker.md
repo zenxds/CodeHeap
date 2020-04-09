@@ -32,6 +32,8 @@ docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs -r docker 
 
 # 删除没用的volume
 docker volume rm `docker volume ls -f dangling=true |grep -v DRIVER|awk '{print $2}'`
+
+[迁移docker数据目录](https://blog.csdn.net/waplys/article/details/93844452)
 ```
 
 ## Dockerfile

@@ -42,8 +42,10 @@ free -m
 # 搜索文件
 find 目录 -iname *php*
 
+# 格式化
+mkfs -t ext4 /dev/vdb
 # 盘符挂载
 mount /dev/vdb1 /dxdata
 
 ## 重启自动挂载
-echo /dev/vdb1 /dxdata ext3 defaults 0 0 >> /etc/fstab
+echo /dev/vdb1 /dxdata ext4 defaults 0 0 >> /etc/fstab
