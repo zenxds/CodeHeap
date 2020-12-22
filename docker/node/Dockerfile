@@ -1,6 +1,6 @@
 FROM node:8
 
-ENV APP_DIR /home
+ENV APP_DIR /usr/src/app
 
 ENV TZ Asia/Shanghai
 

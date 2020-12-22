@@ -70,3 +70,4 @@ package-lock.json
 
 # https://ihatetomatoes.net/how-to-remove-experimentaldecorators-warning-in-vscode/
 # tsconfig.json
+docker/nginx/log/*.log

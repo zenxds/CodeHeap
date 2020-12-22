@@ -7,6 +7,8 @@ redis-server /usr/local/etc/redis.conf
 
 redis-cli -h 127.0.0.1 -p 6379
 redis-cli SHUTDOWN
+
+redis-cli --raw keys "users-2019*" | xargs redis-cli del
 ```
 
 ### redis-cli

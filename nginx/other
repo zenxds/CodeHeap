@@ -23,6 +23,11 @@ server {
     return 200 '2018010208351812j9hg48swxmhz6c9gox2ppzxnm5swyvt2z09axt29d0qowy8i';
   }
 
+  location ^~ /my-module/ {
+    root /data/my-module/dist;
+    rewrite ^/my-module/(.*)$ /$1 break;
+    index index.html index.htm;
+  }
 
   location ~* \.(jpg|jpeg|gif|png|ico|svg|css|js|eot|ttf|woff|woff2)$ {
     root /path/to/anothersite1;

@@ -49,3 +49,8 @@ mount /dev/vdb1 /dxdata
 
 ## 重启自动挂载
 echo /dev/vdb1 /dxdata ext4 defaults 0 0 >> /etc/fstab
+
+## awk查看日志某一列
+cat access.log | awk '{print $9}'
+## 统计IP排行
+awk '{print $1}' access.log |sort |uniq -c|sort -n
