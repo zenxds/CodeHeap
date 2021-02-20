@@ -54,3 +54,15 @@ echo /dev/vdb1 /dxdata ext4 defaults 0 0 >> /etc/fstab
 cat access.log | awk '{print $9}'
 ## 统计IP排行
 awk '{print $1}' access.log |sort |uniq -c|sort -n
+
+
+## centos防火墙
+systemctl status firewalld
+systemctl start firewalld 
+firewall-cmd --list-ports
+firewall-cmd --zone=public --add-port=80/tcp --permanen
+firewall-cmd --zone=public --add-service=http --permanen
+firewall-cmd --reload
+
+# -N disables executing a remote shell
+ssh -N -L 9000:127.0.0.1:8886 zenxds@zenxds.com

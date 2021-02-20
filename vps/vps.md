@@ -16,6 +16,7 @@ adduser zenxds
 passwd zenxds
 # 加到sudo组
 usermod -a -G sudo zenxds或root zenxds
+sudo usermod -a -G docker $USER
 // or
 visudo
 
@@ -34,7 +35,7 @@ npm install -g fkill pm2 yarn
 ```
 
 ```
-# 生成ssh key
+# 生成ssh keyls
 ssh-keygen -t rsa -b 4096 -C "xx@gmail.com"
 
 # 将本地机器的ssh key加入到vps的authorized_keys里面，并修改权限
